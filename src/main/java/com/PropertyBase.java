@@ -15,6 +15,7 @@ public class PropertyBase
     public static void main(String[] args) 
     {
        
+        //ValidationsHelper.startMenu();
         SwingUtilities.invokeLater(() -> 
         {                                                      
             JFrame appWindow = new JFrame("Property Management System");                            //-Creates JFrame application window called "appWindow"

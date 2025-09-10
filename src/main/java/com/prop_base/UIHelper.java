@@ -11,7 +11,7 @@ public class UIHelper
     JLabel dateTime;
 
     /**
-     * Updates the date/time label every second.
+     * Updates the date/time label every second
      */
     public static void startClock(JLabel dateTime) 
     {

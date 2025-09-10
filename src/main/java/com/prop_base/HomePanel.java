@@ -5,13 +5,11 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-public class HomePanel  extends JPanel                                                           //-Main panel inherits JPanel
-{                                                         //-Declares the sidebar panel
-    private TopPanel topPanel;                                                                  //-Declares the top panel
-    
-    /**
-     * 
-     */
+public class HomePanel  extends JPanel                                                              //-Home panel inherits JPanel (Becomes a JPanel)
+{                                                                                                   
+    private final TopPanel topPanel;                                                                //-Declaration for the TopPanel           
+    private final SideBarPanel sidebarPanel;                                                        //-Declaration for the SideBarPanel
+
     public HomePanel() 
     {
     
@@ -22,9 +20,12 @@ public class HomePanel  extends JPanel                                          
 
 //STEP 2: CREATE LAYOUT, CREATE AND ADD PANELS               
         //+++ TOP PANEL
-            topPanel = new TopPanel();                                                              //-Creates a new instance of TopPanel and assigns it to topPanel
-
+            topPanel = new TopPanel(ValidationsHelper.getName(), ValidationsHelper.getSurname());   //-Gets the name and surname that was captured and diplays it in coloum 3
             add(topPanel, BorderLayout.NORTH);
+    
+        //+++ SIDEBAR PANEL
+            sidebarPanel = new SideBarPanel();                                                      //-Creates a new instance of SidebarPanel and assigns it to sidebarPanel
+            add(sidebarPanel, BorderLayout.WEST);                                                   //-Adds the sidebar panel to the west side of the main panel
     }
 
 
