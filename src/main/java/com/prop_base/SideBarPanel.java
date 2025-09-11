@@ -51,7 +51,7 @@ public class SideBarPanel extends JPanel
         {
             JButton button = new JButton(buttonLabels[i]);                                          //-Creates a new button with the label
             sidebarButton.put(buttonLabels[i], button);                                             //-Adds the button to the map with the label as the key
-            StyleHelper.styleSidebarButton(button);                                                 //-Styles the button using the StyleHelper
+            StyleHelper.styleButton(button);                                                 //-Styles the button using the StyleHelper
 
             if (i == buttonLabels.length - 1)                                                       //-Length - 1 is the logout button
             {
@@ -63,8 +63,20 @@ public class SideBarPanel extends JPanel
             }
 
         }
-        add(topSection, BorderLayout.NORTH);                                                    //-Adds the top section to the north
-        add(bottomSection, BorderLayout.SOUTH);                                                 //-Adds the bottom section to the south
+        add(topSection, BorderLayout.NORTH);                                                        //-Adds the top section to the north
+        add(bottomSection, BorderLayout.SOUTH);                                                     //-Adds the bottom section to the south
     }
+
+    /**
+     * Getters for HomePanel to attach navigation logic
+     * @return
+     */
+    public JButton getEnterPropertyButton() { return sidebarButton.get("Add New Property"); }
+    public JButton getSearchPropertiesButton() { return sidebarButton.get("Search Properties"); }
+    public JButton getUpdatePropertyButton() { return sidebarButton.get("Update Property"); }
+    public JButton getDeletePropertyButton() { return sidebarButton.get("Delete Property"); }
+    public JButton getPrintAllPropertiesButton() { return sidebarButton.get("Print All Properties"); }
+    public JButton getLogoutButton() { return sidebarButton.get("Logout"); }
+
 }
 

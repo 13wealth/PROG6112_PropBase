@@ -3,45 +3,52 @@ package com.prop_base;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class HomePanel  extends JPanel                                                              //-Home panel inherits JPanel (Becomes a JPanel)
 {                                                                                                   
-    private final TopPanel topPanel;                                                                //-Declaration for the TopPanel           
-    private final SideBarPanel sidebarPanel;
-    private final DisplayPanel displayPanel;                                                         //-Declaration for the DisplayPanel
-
     public HomePanel() 
     {
     
-//STEP 1: CREATE LAYOUT, CREATE AND ADD PANELS   
+//STEP 1: CREATE LAYOUT AND ADD STYLING   
 
-            setLayout(new BorderLayout());                                                          //-Sets a layout manager
-            setBackground(new Color(60, 60, 60));                                                   //-Sets a background color for the main panel
+        setLayout(new BorderLayout());                                                              //-Sets a layout manager
+        setBackground(new Color(60, 60, 60));                                                       //-Sets a background color for the main panel
 
-//STEP 2: CREATE LAYOUT, CREATE AND ADD PANELS               
-        //+++ TOP PANEL
-            topPanel = new TopPanel(ValidationsHelper.getName(), ValidationsHelper.getSurname());   //-Gets the name and surname that was captured and diplays it in coloum 3
-            add(topPanel, BorderLayout.NORTH);
+//STEP 2: ADD PANELS TO THE LAYOUT
+    //+++ TOP PANEL
+        TopPanel topPanel = new TopPanel(                                                           //-Gets the name and surname that was captured and diplays it in coloum 3
+                                        ValidationsHelper.getName(), 
+                                        ValidationsHelper.getSurname()
+        );       
+        add(topPanel, BorderLayout.NORTH);
     
-        //+++ SIDEBAR PANEL
-            sidebarPanel = new SideBarPanel();                                                      //-Creates a new instance of SidebarPanel and assigns it to sidebarPanel
-            add(sidebarPanel, BorderLayout.WEST);                                                   //-Adds the sidebar panel to the west side of the main panel
+    //+++ SIDEBAR PANEL
+        SideBarPanel sidebarPanel = new SideBarPanel();                                             //-Creates a new instance of SidebarPanel and assigns it to sidebarPanel
+        add(sidebarPanel, BorderLayout.WEST);                                                       //-Adds the sidebar panel to the west side of the main panel
     
-        //+++ MAIN CONTENT PANEL
-            displayPanel = new DisplayPanel();
-            add(displayPanel, BorderLayout.CENTER);     
+    //+++ MAIN CONTENT PANEL
+        DisplayPanel displayPanel = new DisplayPanel();
+        add(displayPanel, BorderLayout.CENTER); 
 
-
-        }
-
-
-
+//STEP 3: ENTER LOGIC THAT HANDLES SCREEN CHANGES
+    //+++ BUTTON LISTENERS FOR SIDEBAR PANEL
+        JButton addProp = sidebarPanel.getEnterPropertyButton();
+        addProp.addActionListener(e -> 
+        {
+            displayPanel.addPropertyScreen(new EnterProperty());
+        });
     
-        /**
-         * Exposes SidebarPanel for navigation logic
-         * Exposes RightPanel for metadata display
-         * @return
-         */
-        public TopPanel getTopPanel() { return topPanel; }
+    
+    
+    
+    
+    
+    
+    
+        //+++ EXIIT BUTTON    
+        //sidebarPanel.getExitButton().addActionListener(e -> System.exit(0));                        //-When the "Exit" button is clicked, exit the application
+
+    }
 }   

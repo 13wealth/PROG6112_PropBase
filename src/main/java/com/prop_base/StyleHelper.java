@@ -22,9 +22,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
  
 
-public class StyleHelper 
+public class StyleHelper extends JPanel
 {
 
 //-Application Theme colors
@@ -44,29 +47,13 @@ public class StyleHelper
     private static final String FONT_FAMILY = "Arial";
     private static final int FONT_SIZE = 16;
 
-    
-    /**
-     * Creates a styled JLabel with predefined font and color
-     * @param text The label text
-     * @param fontStyle The font style (e.g., Font.PLAIN, Font.BOLD)
-     * @param alignment The horizontal alignment (e.g., SwingConstants.LEFT)
-     * @return A styled JLabel
-     * Styling assisted by OpenAI
-     */
-    public static JLabel createLabel(String text, int fontStyle, int alignment) 
-    {
-        JLabel label = new JLabel(text);
-        label.setFont(new Font(FONT_FAMILY, fontStyle, FONT_SIZE));
-        label.setForeground(TEXT_LIGHT);
-        label.setHorizontalAlignment(alignment);
-        return label;
-    }
-
 
     /**
      * Paints a gradient background for the specified panel
-     * @param panel
-     * @param g The Graphics object used for painting
+     * 
+     * @param panel The panel to paint
+     * @param g     The Graphics object used for painting
+     * Styling assisted by OpenAI
      */
     public static void paintGradientBackground(JPanel panel, Graphics g) 
     {
@@ -83,25 +70,10 @@ public class StyleHelper
 
 
     /**
-     * Adds padding to a JLabel.
-     * @param label The JLabel to which padding will be added
-     * @param top The top padding
-     * @param left The left padding
-     * @param bottom The bottom padding
-     * @param right The right padding
-     */
-    public static void addPadding(JLabel label, int top, int left, int bottom, int right)           //-Adds padding to a JLabel
-    {
-        Border border = BorderFactory.createEmptyBorder(top, left, bottom, right);                  //-Creates an empty border with the specified padding
-        label.setBorder(border);                                                                    //-Sets the border to the label
-    }
-
-
-    /**
      * Adds a hover effect to a JLabel.
-     * @param label The JLabel to which the hover effect will be added
-     * @param hoverColor The color to apply when the mouse is over the label
-     * @param normalColor The color to apply when the mouse is not over the label
+     * @param label         The JLabel to which the hover effect will be added
+     * @param hoverColor    The color to apply when the mouse is over the label
+     * @param normalColor   The color to apply when the mouse is not over the label
      */
     public static void addHoverEffect(JLabel label, Color hoverColor, Color normalColor) 
     {
@@ -119,13 +91,130 @@ public class StyleHelper
             }
         });
     }
+    
+
+    /**
+     * Creates a styled JLabel with predefined font and color
+     * 
+     * @param text      The label text
+     * @param fontStyle The font style (e.g., Font.PLAIN, Font.BOLD)
+     * @param alignment The horizontal alignment (e.g., SwingConstants.LEFT)
+     * @return          A styled JLabel
+     * Styling assisted by OpenAI
+     */
+    public static JLabel createLabel(String text, int fontStyle, int alignment) 
+    {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font(FONT_FAMILY, fontStyle, FONT_SIZE));
+        label.setForeground(TEXT_LIGHT);
+        label.setHorizontalAlignment(alignment);
+        return label;
+    }
+
+
+   /**
+     * Styles a JLabel with optional padding, border, text color, background color, and size.
+     * Any parameter can be skipped by passing null or 0.
+     *
+     * @param label            The JLabel to style
+     * @param top              Top padding (0 = none)
+     * @param left             Left padding (0 = none)
+     * @param bottom           Bottom padding (0 = none)
+     * @param right            Right padding (0 = none)
+     * @param borderColor      Border color (null = no border)
+     * @param borderThickness  Border thickness (0 = no border)
+     * @param cornerRadius     Rounded corner radius (0 = square)
+     * @param textColor        Text (foreground) color (null = default)
+     * @param bgColor          Background color (null = transparent/default)
+     * @param prefWidth        Preferred width (0 = ignore)
+     * @param prefHeight       Preferred height (0 = ignore)
+     * Styling assisted by OpenAI
+     */
+     
+    public static void styleLabel(
+                                  JLabel label,
+                                  int top, int left, int bottom, int right,
+                                  Color borderColor, int borderThickness, int cornerRadius,
+                                  Color textColor, Color bgColor,
+                                  int prefWidth, int prefHeight
+                                  ) 
+    {
+        Border padding = null; 
+        Border border = null;
+
+//-If any of the conditions are not met, the corresponding style will be
+    //-Padding validation
+        if (top > 0 || left > 0 || bottom > 0 || right > 0)                                         //-Only create padding if any value is greater than 0
+        {
+            padding = new EmptyBorder(top, left, bottom, right);
+        }
+
+    //-Border (square or rounded)
+        if (borderColor != null && borderThickness > 0)                                             //-Only create border if color and thickness are valid
+        {
+            border = new LineBorder(borderColor, borderThickness);                                  //-Square border
+           
+            /*if (cornerRadius > 0) 
+            {
+                border = new RoundedBorder(borderColor, borderThickness, cornerRadius);
+            } else {
+                border = new LineBorder(borderColor, borderThickness);
+            }*/
+        }
+
+    //-Combine padding + border
+        if (border != null && padding != null)                                                      //-Create a compound border if both are present
+        {
+            label.setBorder(new CompoundBorder(border, padding));
+            } else if (border != null) {
+                label.setBorder(border);
+            } else if (padding != null) {
+            label.setBorder(padding);
+        }
+
+    //-Text color
+        if (textColor != null)                                                                      //-Only set text color if valid
+        {
+            label.setForeground(textColor);
+        }
+
+    //-Background color
+        if (bgColor != null)                                                                        //-Only set background color if valid
+        {
+            label.setOpaque(true);                                                                  //-Needed to show background
+            label.setBackground(bgColor);
+        }
+
+    //-Preferred size
+        if (prefWidth > 0 && prefHeight > 0)                                                        //-Only set preferred size if both dimensions are valid
+        {
+            label.setPreferredSize(new Dimension(prefWidth, prefHeight));
+        }
+    }
+
+    
+    /**
+     * Shortcut method to add padding only to a JLabel
+     * 
+     * @param label     The JLabel to style
+     * @param top       The top padding
+     * @param left      The left padding
+     * @param bottom    The bottom padding
+     * @param right     The right padding
+     */
+    public static void addPadding(JLabel label, int top, int left, int bottom, int right)           //-Adds padding to a JLabel
+    {
+        Border border = BorderFactory.createEmptyBorder(top, left, bottom, right);                  //-Creates an empty border with the specified padding
+        label.setBorder(border);                                                                    //-Sets the border to the label
+    }
 
 
     /**
      * Adds a dynamic font size to a JLabel based on the size of its parent JPanel.
-     * @param panel The JPanel that contains the JLabel
-     * @param label The JLabel to which the dynamic font size will be applied
-     * @param divisor The divisor used to calculate the font size
+     * 
+     * @param panel     The JPanel that contains the JLabel
+     * @param label     The JLabel to which the dynamic font size will be applied
+     * @param divisor   The divisor used to calculate the font size
      */
     public static void addDynamicFont(JPanel panel, JLabel label, int divisor, int maxSize) 
     {
@@ -140,17 +229,19 @@ public class StyleHelper
         });
     }
 
-
+     
     /**
-     * Styles a sidebar button with consistent colors, padding, and hover/click effects   
+     * Styles a sidebar button with consistent colors, padding, and hover/click effects
+     *
+     * @param button The button to style
      */
-    public static void styleSidebarButton(JButton button) 
+    public static void styleButton(JButton button) 
     {
         button.setFocusPainted(false);                                                              //-Disable focus painting
         button.setContentAreaFilled(false);                                                         //-Set false to paint custom background
         button.setOpaque(false);                                                                    //-Make base transparent
         button.setForeground(BTN_FG);                                                               //-Set foreground color
-        button.setFont(new Font("Segoe UI", Font.PLAIN, 12));                                           //-Set font
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 12));                                       //-Set font
         button.setHorizontalAlignment(SwingConstants.LEFT);                                         //-Set horizontal alignment
         button.setBorder(BorderFactory.createEmptyBorder());                                        //-Remove default borders entirely
         button.setPreferredSize(new Dimension(180, 40));
@@ -190,12 +281,52 @@ public class StyleHelper
                 g2D.drawString(text, x, y);                                                         //-Draws the button text
                 
                 g2D.dispose();                                                                      //-Releases the graphics context
-            
             }
         });
         button.addChangeListener(e -> button.repaint());                                            //-Repaints the button when its state changes
     }
+
+    /**
+     * Paints a card-like UI component with rounded corners and a subtle shadow
+     * 
+     * @param g                  The graphics context
+     * @param width              The width of the component
+     * @param height             The height of the component
+     * @param cornerRadius       The radius of the component's corners
+     * @param borderThickness    The thickness of the component's border
+     * @param borderColor        The color of the component's border
+     * @param bgColor            The background color of the component
+     */
+    public static void paintCard(Graphics g, int width, int height, int cornerRadius, int borderThickness, Color borderColor, Color bgColor) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        int shadowSize = 4;
+
+        // Subtle shadow
+        for (int i = 1; i <= shadowSize; i++) {
+            int alpha = 30 - (i * 5);
+            if (alpha < 0) alpha = 0;
+            g2.setColor(new Color(0, 0, 0, alpha));
+            g2.fillRoundRect(i, i, width - i - i / 2, height - i - i / 2, cornerRadius, cornerRadius);
+        }
+
+        // Border
+        g2.setColor(borderColor);
+        g2.fillRoundRect(0, 0, width - shadowSize, height - shadowSize, cornerRadius, cornerRadius);
+
+        // Background
+        g2.setColor(bgColor);
+        g2.fillRoundRect(borderThickness, borderThickness,
+                width - 2 * borderThickness - shadowSize,
+                height - 2 * borderThickness - shadowSize,
+                cornerRadius - borderThickness,
+                cornerRadius - borderThickness);
+
+        g2.dispose();
+    }
 }
+
 
 
 

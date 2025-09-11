@@ -17,13 +17,20 @@ public class DisplayPanel extends JPanel
     }
     
     /**
-     * Method is called to display a new screen in the display panel when buttons are pressed
+     * Method is called to display a form to capture new property
      * @param screen
      */
-    public void showScreen(JPanel screen) 
+    public void addPropertyScreen(JPanel screen) 
     {
-        removeAll();                                                                                //-Clears the panel
-        add(screen, new GridBagConstraints());                                                      //-Adds new screen
+        removeAll();
+        GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            gbc.fill = GridBagConstraints.NONE;                                                     //-Sets the panel to not stretch
+            gbc.anchor = GridBagConstraints.CENTER;                                                 //-Centers the panel
+        add(screen, gbc);                                                                           //-Adds the screen panel to the display panel
         revalidate();                                                                               //-Revalidates the panel
         repaint();                                                                                  //-Repaints the panel
     }

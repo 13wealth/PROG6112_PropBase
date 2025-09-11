@@ -48,7 +48,7 @@ public class TopPanel extends JPanel
         add(userName);                                                                              //-Adds the user name to the panel
         
 //-Step 3: Add some styling to the top panel       
-        StyleHelper.addPadding(appLogo, 0, 0, 0, 0);                         //-Adds padding to appLogo
+        StyleHelper.addPadding(appLogo, 0, 0, 0, 0);                          //-Adds padding to appLogo
         StyleHelper.addPadding(welcomeNote, 0, 5, 0, 5);                      //-Adds padding to welcomeNote
         StyleHelper.addPadding(userName, 0, 0, 0, 15);                        //-Adds padding to userName
         StyleHelper.addHoverEffect(userName, Color.YELLOW, StyleHelper.TEXT_LIGHT);                 //-Adds hover effect to userName
