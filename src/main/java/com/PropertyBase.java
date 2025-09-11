@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import com.prop_base.HomePanel;
+//import com.prop_base.ValidationsHelper;
+
 
 public class PropertyBase 
 {

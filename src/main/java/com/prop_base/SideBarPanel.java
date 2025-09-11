@@ -1,5 +1,7 @@
 package com.prop_base;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.LinkedHashMap;
@@ -23,11 +25,18 @@ public class SideBarPanel extends JPanel
 
     public SideBarPanel() 
     {
-        setLayout(new GridLayout(6, 1, 10, 10));                                                    //-Sets layout of 6 rows, 1 column, 10px horizontal and vertical gaps
-        setBorder(BorderFactory.createEmptyBorder(20, 18, 20, 18));                                 //-Sets border of 22px top/bottom and 15px left/right
-        setPreferredSize(new Dimension(200, 0));
-        setBackground(StyleHelper.LOGO_BG);
+        setLayout(new BorderLayout());                                                              //-Sets layout to BorderLayout
+        setPreferredSize(new Dimension(200, 0));                                                    //-Sets preferred width to 200px, height to auto
+        setBackground(StyleHelper.LOGO_BG);                                                         //-Sets background color to logo color
 
+    //-Splits the SideBarPanel into top and bottom sections
+        JPanel topSection = new JPanel(new GridLayout(0, 1, 10, 10));                               //-Top section for main buttons 0 rows, 1 column, 10px hgap, 10px vgap
+        topSection.setOpaque(false);                                                                //-Makes background transparent
+        topSection.setBorder(BorderFactory.createEmptyBorder(20, 36, 10, 36));                       //-Applies padding of 20px top, 36px left/right, 10px bottom
+
+        JPanel bottomSection = new JPanel(new GridLayout(1, 1));
+        bottomSection.setOpaque(false);                                                             //-Makes background transparent
+        bottomSection.setBorder(BorderFactory.createEmptyBorder(10, 36, 20, 36));                   //-Applies padding of 10px top, 36px left/right, 20px bottom
 
         String[] buttonLabels = {                                                                   //-Adds an array of button labels
                                  "Add New Property", 
@@ -38,12 +47,24 @@ public class SideBarPanel extends JPanel
                                  "Logout", 
                                 }; 
 
-        for (String label : buttonLabels) 
+        for (int i = 0; i < buttonLabels.length; i++) 
         {
-            JButton button = new JButton(label);                                                    //-Creates a new button with the label
-            sidebarButton.put(label, button); 
-            StyleHelper.styleSidebarButton(button);                                                 //-Adds the button to the map with the label as the key
-            add(button);                                                                            //-Adds the button to the panel
+            JButton button = new JButton(buttonLabels[i]);                                          //-Creates a new button with the label
+            sidebarButton.put(buttonLabels[i], button);                                             //-Adds the button to the map with the label as the key
+            StyleHelper.styleSidebarButton(button);                                                 //-Styles the button using the StyleHelper
+
+            if (i == buttonLabels.length - 1)                                                       //-Length - 1 is the logout button
+            {
+                button.setForeground(new Color(220, 53, 69));
+                bottomSection.add(button);                                                          //-If condition is met, add button to bottom section
+            
+            } else {
+                topSection.add(button);                                                             //-All other buttons go to top section
+            }
+
         }
+        add(topSection, BorderLayout.NORTH);                                                    //-Adds the top section to the north
+        add(bottomSection, BorderLayout.SOUTH);                                                 //-Adds the bottom section to the south
     }
 }
+
