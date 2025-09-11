@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 public class HomePanel  extends JPanel                                                              //-Home panel inherits JPanel (Becomes a JPanel)
 {                                                                                                   
     private final TopPanel topPanel;                                                                //-Declaration for the TopPanel           
-    private final SideBarPanel sidebarPanel;                                                        //-Declaration for the SideBarPanel
+    private final SideBarPanel sidebarPanel;
+    private final DisplayPanel displayPanel;                                                         //-Declaration for the DisplayPanel
 
     public HomePanel() 
     {
@@ -26,13 +27,21 @@ public class HomePanel  extends JPanel                                          
         //+++ SIDEBAR PANEL
             sidebarPanel = new SideBarPanel();                                                      //-Creates a new instance of SidebarPanel and assigns it to sidebarPanel
             add(sidebarPanel, BorderLayout.WEST);                                                   //-Adds the sidebar panel to the west side of the main panel
-    }
+    
+        //+++ MAIN CONTENT PANEL
+            displayPanel = new DisplayPanel();
+            add(displayPanel, BorderLayout.CENTER);     
 
 
+        }
+
+
+
+    
         /**
          * Exposes SidebarPanel for navigation logic
          * Exposes RightPanel for metadata display
          * @return
          */
         public TopPanel getTopPanel() { return topPanel; }
-    }   
+}   

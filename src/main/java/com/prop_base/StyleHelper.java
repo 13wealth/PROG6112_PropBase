@@ -30,6 +30,7 @@ public class StyleHelper
 //-Application Theme colors
     public static final Color DARK_BG = new Color(45, 45, 45);
     public static final Color LOGO_BG = new Color(83, 113, 255);                                    //-RGB for #491470 same colour as logo
+    public static final Color CONTENT_BG = new Color(240, 240, 240);                                //-Sets background color for the main content panel
     public static final Color TEXT_LIGHT = Color.WHITE;
     public static final Color TOP_PANEL_GRADIENT_TOP = new Color(75, 0, 130);
     public static final Color TOP_PANEL_GRADIENT_BOTTOM = new Color(45, 45, 45);

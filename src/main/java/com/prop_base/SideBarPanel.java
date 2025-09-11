@@ -32,7 +32,7 @@ public class SideBarPanel extends JPanel
     //-Splits the SideBarPanel into top and bottom sections
         JPanel topSection = new JPanel(new GridLayout(0, 1, 10, 10));                               //-Top section for main buttons 0 rows, 1 column, 10px hgap, 10px vgap
         topSection.setOpaque(false);                                                                //-Makes background transparent
-        topSection.setBorder(BorderFactory.createEmptyBorder(20, 36, 10, 36));                       //-Applies padding of 20px top, 36px left/right, 10px bottom
+        topSection.setBorder(BorderFactory.createEmptyBorder(70, 36, 10, 36));                       //-Applies padding of 70px top, 36px left/right, 10px bottom
 
         JPanel bottomSection = new JPanel(new GridLayout(1, 1));
         bottomSection.setOpaque(false);                                                             //-Makes background transparent
