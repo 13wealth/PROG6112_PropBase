@@ -22,7 +22,8 @@ public class PropertyBase
         {                                                      
             JFrame appWindow = new JFrame("Property Management System");                            //-Creates JFrame application window called "appWindow"
             appWindow.add(new HomePanel());                                                         //-Fills up the frame with HomePanel components
-            appWindow.setSize(1000, 600);                                                           //-Sets the initial size of the application window
+            appWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);                                      //-Sets the application window to be maximised
+            appWindow.setSize(1000, 600);                                                           //-Sets the size of the application window when minimised
             appWindow.setLocationRelativeTo(null);                                                  //-Centers the frame on the screen
             appWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);                               //-Ensure the application exits when the frame is closed
             appWindow.setVisible(true);                                                             //-Make the frame visible

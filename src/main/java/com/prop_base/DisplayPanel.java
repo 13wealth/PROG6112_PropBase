@@ -8,19 +8,19 @@ import javax.swing.JPanel;
 public class DisplayPanel extends JPanel
 {
     /**
-     * Constructor for the DisplayPanel class.
+     * Constructor for the DisplayPanel class
      */
     public DisplayPanel()
     {
         setLayout(new GridBagLayout());
-        setBackground(StyleHelper.CONTENT_BG);
+        setBackground(StyleHelper.CONTENT_BG);                                                      //-Sets background color for the content panel
     }
     
     /**
      * Method is called to display a form to capture new property
      * @param screen
      */
-    public void addPropertyScreen(JPanel screen) 
+    public void addScreen(JPanel screen) 
     {
         removeAll();
         GridBagConstraints gbc = new GridBagConstraints();

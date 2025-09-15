@@ -296,38 +296,43 @@ public class StyleHelper extends JPanel
      * @param borderThickness    The thickness of the component's border
      * @param borderColor        The color of the component's border
      * @param bgColor            The background color of the component
+     * Styling assisted by Open AI
      */
-    public static void paintCard(Graphics g, int width, int height, int cornerRadius, int borderThickness, Color borderColor, Color bgColor) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    public static void paintCard(
+                                  Graphics g, 
+                                  int width, int height, 
+                                  int cornerRadius, int borderThickness, 
+                                  Color borderColor, Color bgColor
+                                ) 
+    {
+        Graphics2D g2D = (Graphics2D) g.create();
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);   /* Graphics object g2D enables anti-aliasing for smoother edges
+                                                                                                     * setRenderingHint → This method tells Java how to render shapes, text, or images. 
+                                                                                                        You give it a key (what property you want to change) and a value (how you want it changed).
+                                                                                                     * RenderingHints.KEY_ANTIALIASING → This key controls anti-aliasing, which is a technique to reduce jagged edges on shapes or text.
+                                                                                                     * RenderingHints.VALUE_ANTIALIAS_ON → This value enables anti-aliasing.
+                                                                                                     */
+    //-Draws the Border
+        g2D.setColor(borderColor);
+        g2D.fillRoundRect(
+                    0, 0, 
+                    width, height, 
+                    cornerRadius, cornerRadius);
 
-        int shadowSize = 4;
-
-        // Subtle shadow
-        for (int i = 1; i <= shadowSize; i++) {
-            int alpha = 30 - (i * 5);
-            if (alpha < 0) alpha = 0;
-            g2.setColor(new Color(0, 0, 0, alpha));
-            g2.fillRoundRect(i, i, width - i - i / 2, height - i - i / 2, cornerRadius, cornerRadius);
-        }
-
-        // Border
-        g2.setColor(borderColor);
-        g2.fillRoundRect(0, 0, width - shadowSize, height - shadowSize, cornerRadius, cornerRadius);
-
-        // Background
-        g2.setColor(bgColor);
-        g2.fillRoundRect(borderThickness, borderThickness,
-                width - 2 * borderThickness - shadowSize,
-                height - 2 * borderThickness - shadowSize,
-                cornerRadius - borderThickness,
-                cornerRadius - borderThickness);
-
-        g2.dispose();
+    //-Sets the background
+        g2D.setColor(bgColor);
+        g2D.fillRoundRect(
+                    borderThickness, borderThickness,
+                    width - 2 * borderThickness,
+                    height - 2 * borderThickness,
+                    cornerRadius - borderThickness,
+                    cornerRadius - borderThickness);
+        g2D.dispose();                                                                               /*Removes window from the screen
+                                                                                                      Then frees up the system resources that the 
+                                                                                                      window was using (memory, handles, etc.).
+                                                                                                    */
     }
 }
-
-
 
 
 

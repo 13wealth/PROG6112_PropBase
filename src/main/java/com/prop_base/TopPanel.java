@@ -58,7 +58,15 @@ public class TopPanel extends JPanel
     @Override                                                                                       //-Overrides paintComponent method from JPanel
     protected void paintComponent(Graphics bg)
     {
-        super.paintComponent(bg);                                                                   //-Calls the superclass method
+        super.paintComponent(bg);                                                                   /* Calls the original paintComponent method from the parent class (like JPanel)
+                                                                                                     * super.paintComponent(g); is very important when you’re custom painting a Swing component like a JPanel or JButton
+                                                                                                     * It ensures that the component is properly rendered before adding any custom graphics.
+                                                                                                     * paintComponent(Graphics g) is the method you override when you want to draw custom stuff
+                                                                                                     * You can use the Graphics object (g) to draw shapes, text, and images on the component
+                                                                                                     * WHY?
+                                                                                                     * - Clears the background – The parent class usually paints the default background
+                                                                                                     * - Prepares the component for new drawings – By clearing the background, you ensure that any new graphics you draw will be on a clean slate
+                                                                                                    */
         StyleHelper.paintGradientBackground(this, bg);                                              //-Paints the gradient background
     }
 }

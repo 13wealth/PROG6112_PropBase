@@ -33,14 +33,20 @@ public class HomePanel  extends JPanel                                          
         add(displayPanel, BorderLayout.CENTER); 
 
 //STEP 3: ENTER LOGIC THAT HANDLES SCREEN CHANGES
-    //+++ BUTTON LISTENERS FOR SIDEBAR PANEL
+    //+++ ENTER PROPERTY
         JButton addProp = sidebarPanel.getEnterPropertyButton();
         addProp.addActionListener(e -> 
         {
-            displayPanel.addPropertyScreen(new EnterProperty());
+            displayPanel.addScreen(new EnterProperty());                                            //-Adds the EnterProperty screen to the display panel
         });
     
-    
+    JButton searchProp = sidebarPanel.getSearchPropertiesButton();
+
+    //+++
+    searchProp.addActionListener(e -> 
+    {
+        displayPanel.addScreen(new SearchProperty());
+    });
     
     
     

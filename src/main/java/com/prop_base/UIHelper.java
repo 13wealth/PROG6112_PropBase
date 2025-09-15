@@ -22,9 +22,14 @@ public class UIHelper
         });
             time.start();                                                                           //-Starts the timer to update the date and time
     }
+    
+    /**
+     * Generates a unique account number.
+     * @return A string representing the account number.
+     */
     public  static String generateAccountNumber() 
     {
-    // Simple example: prefix + random 6 digits
-    return "ACC-" + (int)(Math.random() * 1000000);
-}
+    
+        return "ACC-" + (int)(Math.random() * 1000000);                                             //-Prefix + random 6 digits
+    }
 }
