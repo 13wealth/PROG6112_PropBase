@@ -8,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 public class EnterPropertyCard extends JPanel 
 {
@@ -31,7 +28,7 @@ public class EnterPropertyCard extends JPanel
 
     private final java.util.Map<String, JComponent> components = new java.util.HashMap<>();         //-This is a map called components
     private final JLabel cardTitle;
-    private JButton saveBtn;
+    private final JButton saveBtn;
 
     /**
      * This method creates a card for capturing new property details
@@ -75,105 +72,88 @@ public class EnterPropertyCard extends JPanel
 
         cardProperties.gridwidth = 1; cardProperties.anchor = GridBagConstraints.WEST;              //-The component will only take 1 cell (column) in the grid
 
-        // Fields array: label, type, optional options
-        Object[][] fields = {
+    //-Fields array: label, type, optional options
+    //-Code assisted by Open AI
+        Object[][] fields =                                                                         //-Field definitions using dual arrays
+        {
             {"Property Address", "textfield"},
             {"Monthly Rent", "textfield"},
-            {"Property Type", "combobox", new String[]{"Apartment","House","Flat","TownHouse"}},
+            {"Property Type", "combobox", new String[]{"Apartment","House","Flat","TownHouse"}},    //-Adds the new property types
             {"Bedrooms", "textfield"},
             {"Bathrooms", "textfield"},
-            {"Status", "combobox", new String[]{"Available","Occupied","Maintenance"}},
+            {"Status", "combobox", new String[]{"Available","Occupied","Maintenance"}},             //-Adds the new property statuses
             {"Account Number", "textfield"}
         };
 
-        int col = 0;
+        int col = 0;                                                                                //-Column 0 = the first column in the grid
+        JComponent comp;                                                                            //-Declares a component variable
+
         for (int i = 0; i < fields.length; i++) 
         {
-            String labelText = (String) fields[i][0];
-            String type = (String) fields[i][1];
+            String labelText = (String) fields[i][0];                                               //-Creates the label text
+            String type = (String) fields[i][1];                                                    //-Creates the field type
 
-            cardProperties.gridx = col;
-            cardProperties.gridy = row;
-            add(new JLabel(labelText + ":"), cardProperties);
+            cardProperties.gridx = col;                                                             //-Sets the column position
+            cardProperties.gridy = row;                                                             //-Sets the row position
+            add(new JLabel(labelText + ":"), cardProperties);                                       //-Adds the label to the grid
 
-            JComponent comp;
-
-            switch (type.toLowerCase()) {
-                case "textfield":
-                    comp = new JTextField(10);
-                    highlightActive(comp);
+    //-Switch statement for different field types
+            switch (type.toLowerCase())         
+            {
+                case "textfield":                                                                   //-Switch statement for text fields
+                    comp = new JTextField(10);                                                      //-Creates a text field with 10 columns
+                    StyleHelper.highlightActive(comp);                                                          //-Adds focus highlighting to the component
                     if ("Account Number".equals(labelText)) 
                     {
                         ((JTextField) comp).setText(UIHelper.generateAccountNumber());              //-Calls a method to generate a new account number
                         ((JTextField) comp).setEditable(false);                                     //-Sets field as a read-only
-        }
-                    break;
-                case "combobox":
+                    }
+                        break;
+                
+                case "combobox":                                                                    //-Switch statement for combo boxes
                     comp = new JComboBox<>((String[]) fields[i][2]);
                     break;
-                default:
-                    comp = new JTextField(10);
-                    highlightActive(comp);
+                default:                                                                            //-Default to text area for any other type
+                    comp = new JTextArea(3, 20);                                                    //-Creates a text area
+                    StyleHelper.highlightActive(comp);
             }
 
-            cardProperties.gridy = row + 1;
-            add(comp, cardProperties);
-            components.put(labelText, comp);
+                    cardProperties.gridy = row + 1;                                                 //-Places the component in the next row
+                    add(comp, cardProperties);                                                      //-Adds the component to the grid
+                    components.put(labelText, comp);                                                //-Stores the component in the map with its label as the key
+            col++;                                                                                  //-Move to the next column
 
-            col++;
-
-            // Switch for row breaks
-            switch (i) {
-                case 1: // after Monthly Rent
-                case 4: // after Bathrooms
-                case 5: // after Status
-                    row += 2;
-                    col = 0;
-                    break;
+    //-Switch for row breaks
+            switch (i) 
+            {
+                case 1:                                                                             //-Checks the value of variable i
+                case 4:                                                                             //-Checks the value of variable i
+                case 5:                                                                             //-Checks the value of variable i
+                    row += 2;                                                                       //-Move to the next row after every 2 fields
+                    col = 0;                                                                        //-Reset column to 0 for the new row
+                break;
             }
         }
 
-    //-Save button
-        row += 2;
-        cardProperties.gridx = 0;
-        cardProperties.gridy = row;
-        cardProperties.gridwidth = 1;
+    //-The Save button
+        row += 2;                                                                                   //-Move to the next row for the button
+        cardProperties.gridx = 0;                                                                   //-Start at column 0.
+        cardProperties.gridy = row;                                                                 //-Set the row for the button
+        cardProperties.gridwidth = 1;                                                               //-Set the width of the button
         cardProperties.anchor = GridBagConstraints.CENTER;
 
         saveBtn = new JButton("Add Property");
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(saveBtn);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));                  //-Creates a panel for the button
+        buttonPanel.setOpaque(false);                                                               //-Makes the panel transparent
+        buttonPanel.add(saveBtn);                                                                   //-Adds the save button to the panel
 
-        cardProperties.gridx = 0;
-        cardProperties.gridy = row;
+        cardProperties.gridx = 0;                                                                   //-Set the column for the button
+        cardProperties.gridy = row;                                                                 //-Set the row for the button
         cardProperties.gridwidth = 3;
-        add(buttonPanel, cardProperties);
-    }
+        add(buttonPanel, cardProperties);                                                           //-Adds the button panel to the card
 
-
-    /**
-     * Highlights the border of a field (JComponent) when it is active (focused)
-     * Improves user experience by providing visual feedback
-     * @param comp The component to add focus highlighting to
-     */
-    private void highlightActive(JComponent comp) 
-    {
-        comp.addFocusListener(new FocusAdapter() 
-        {
-            Border original = comp.getBorder();                                                     //-Store the original border
-            @Override                                                                               //-When the component gains focus
-            public void focusGained(FocusEvent a) 
-            {
-                comp.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));                      //-Change border color to blue
-            }
-            @Override                                                                               //-When the component loses focus
-            public void focusLost(FocusEvent b) 
-            {
-                comp.setBorder(original);                                                           //-Restore the original border
-            }
-        });
+        buttonPanel.add(saveBtn);                                                                   //-Adds the save button to the panel
     }
     
     
@@ -215,6 +195,10 @@ public class EnterPropertyCard extends JPanel
         return null;                                                                                //-If component is not recognized, return null
     }
 
-    public JButton getSaveButton() {return saveBtn;}
+    /**
+     * Exposes the save button for adding a new property
+     * @return The button used to save the property details
+     */
+    public JButton getSaveButton() { return saveBtn; }
+    public java.util.Map<String, JComponent> getComponentMap() { return components; }
 }
-

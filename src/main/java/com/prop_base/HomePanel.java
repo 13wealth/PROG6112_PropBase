@@ -39,21 +39,22 @@ public class HomePanel  extends JPanel                                          
         {
             displayPanel.addScreen(new EnterProperty());                                            //-Adds the EnterProperty screen to the display panel
         });
-    
-    JButton searchProp = sidebarPanel.getSearchPropertiesButton();
 
-    //+++
-    searchProp.addActionListener(e -> 
-    {
-        displayPanel.addScreen(new SearchProperty());
-    });
-    
-    
-    
-    
-    
-    
-        //+++ EXIIT BUTTON    
+    //+++ SEARCH PROPERTY    
+        JButton searchProp = sidebarPanel.getSearchPropertiesButton();
+        searchProp.addActionListener(e -> 
+        {
+            displayPanel.addScreen(new SearchProperty());
+        });
+
+    //+++ UPDATE PROPERTY
+        JButton updateProp = sidebarPanel.getUpdatePropertyButton();
+        updateProp.addActionListener(e ->
+        {
+            displayPanel.addScreen(new UpdateProperty());
+        });
+
+        //+++ EXIT BUTTON
         //sidebarPanel.getExitButton().addActionListener(e -> System.exit(0));                        //-When the "Exit" button is clicked, exit the application
 
     }

@@ -8,10 +8,13 @@ import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -20,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -286,6 +290,7 @@ public class StyleHelper extends JPanel
         button.addChangeListener(e -> button.repaint());                                            //-Repaints the button when its state changes
     }
 
+
     /**
      * Paints a card-like UI component with rounded corners and a subtle shadow
      * 
@@ -332,13 +337,66 @@ public class StyleHelper extends JPanel
                                                                                                       window was using (memory, handles, etc.).
                                                                                                     */
     }
-}
+    
+    
+    /**
+     * Highlights the border of a field (JComponent) when it is active (focused)
+     * Improves user experience by providing visual feedback
+     * @param comp The component to add focus highlighting to
+     */
+    public static void highlightActive(JComponent comp) 
+    {
+        comp.addFocusListener(new FocusAdapter() 
+        {
+            Border original = comp.getBorder();                                                     //-Store the original border
+            @Override                                                                               //-When the component gains focus
+            public void focusGained(FocusEvent a) 
+            {
+                comp.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));                      //-Change border color to blue
+            }
+            @Override                                                                               //-When the component loses focus
+            public void focusLost(FocusEvent b) 
+            {
+                comp.setBorder(original);                                                           //-Restore the original border
+            }
+        });
+    }
 
+
+    /**
+    * Creates a label + text field pair in a given row of your layout
+    * @param label
+    * @param row
+    * @return
+    * Styling was assisted by Open AI
+    */
+    public static JTextField addLabeledField(JPanel parent, String label, int row) 
+    {
+        GridBagConstraints controls = new GridBagConstraints();
+        controls.insets = new Insets(8, 8, 8, 8);                                                   //-Set padding for components
+        controls.fill = GridBagConstraints.HORIZONTAL;                                              //-Make components stretch horizontally
+        controls.weightx = 1;                                                                       //-Allow components to grow horizontally
+
+    //-Label
+        controls.gridx = 0;                                                                         //-Places the label in the first column
+        controls.gridy = row;                                                                       //-Sets the row for the label
+        parent.add(new JLabel(label), controls);                                                    //-Add label to the panel
+
+    //-Field
+        JTextField field = new JTextField(20);                                                      //-Create a text field with 20 columns
+        field.setBorder(new LineBorder(Color.GRAY, 1, true));                                       //-Full gray border with rounded corners
+        field.setBackground(Color.WHITE);
+        controls.gridx = 1;                                                                         //-places the text field in the second column
+        parent.add(field, controls);
+
+        return field;
+    }
+}
 
 
 
 /**
  * References
- * OpenAI. (2025, September 10). *ChatGPT* (Version GPT-4) [Large language model]. https://chat.openai.com/chat
+ * OpenAI. (2025, September 16). *ChatGPT* (Version GPT-4) [Large language model]. https://chat.openai.com/chat
  *
  */
