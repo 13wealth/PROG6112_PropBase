@@ -2,6 +2,7 @@ package com.prop_base;
 
 import java.awt.BorderLayout;
 import java.io.FileWriter;
+import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -72,13 +73,15 @@ public class UpdateProperty extends JPanel
                                           JOptionPane.ERROR_MESSAGE
                                          );
             card.getUpdateButton().setEnabled(false);                                               //-Disables the update button if no property is found
-                clearFields();                                                                          //-Calls a method to clear all input fields
-                    return;                                                                                 //-Exits the method if no property is found
+                clearFields();                                                                      //-Calls a method to clear all input fields
+                    return;                                                                         //-Exits the method if no property is found
         }
 
     //-Else populate fields if property is found
+        DecimalFormat df = new DecimalFormat("#,##0.00");                                           //-Sets the currency format
+        
         card.getAddressField().setText(property.optString("Property Address"));
-        card.getRentField().setText(property.optString("Monthly Rent"));
+        card.getRentField().setText(df.format(property.optDouble("Monthly Rent")));             //-Formats the rent field
         card.getTypeField().setText(property.optString("Property Type"));
         card.getBedroomsField().setText(property.optString("Bedrooms"));
         card.getBathroomsField().setText(property.optString("Bathrooms"));
@@ -94,7 +97,6 @@ public class UpdateProperty extends JPanel
     private void updateProperty() 
     {
         if (currentIndex < 0) return;                                                               //-No property selected for update
-
         try 
         {
             JSONObject updateObj = ValidationsHelper.getPropertyArray().getJSONObject(currentIndex);//-Gets the property object at currentIndex
@@ -110,7 +112,7 @@ public class UpdateProperty extends JPanel
         //-Save back to JSON file
             try (FileWriter writer = new FileWriter("AllProperties.json")) 
             {
-                writer.write(ValidationsHelper.getPropertyArray().toString(4));        //- Save updated properties
+                writer.write(ValidationsHelper.getPropertyArray().toString(4));        //-Save updated properties
             }
 
             JOptionPane.showMessageDialog(this, "Property updated successfully!", "Success",
@@ -136,7 +138,8 @@ public class UpdateProperty extends JPanel
     /**
      * Clears all input fields in the update property form
      */
-    private void clearFields() {
+    private void clearFields() 
+    {
         card.getAddressField().setText("");
         card.getRentField().setText("");
         card.getTypeField().setText("");

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -187,11 +188,12 @@ public class ValidationsHelper
 
         if (property != null)                                                                       //-If search is successful
         {
+            DecimalFormat currency = new DecimalFormat("#,##0.00");                                 //-Formats numbers to 2 decimal places
             Object[] row =                                                                          //-Populate these keys from the property JSONObject
             {                
                 property.optString("Account Number"),                                           
                 property.optString("Property Address"), 
-                property.optString("Monthly Rent"),
+                currency.format(property.optDouble("Monthly Rent")),                            //-Displays the monthly rent formatted to 2 decimal places
                 property.optString("Property Type"),
                 property.optString("Bedrooms"),
                 property.optString("Bathrooms"),

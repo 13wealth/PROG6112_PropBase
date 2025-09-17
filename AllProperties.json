@@ -4,7 +4,7 @@
         "Property Address": "12123 Flow Street",
         "Account Number": "ACC-805809",
         "Property Type": "House",
-        "Monthly Rent": "3,245.00",
+        "Monthly Rent": "3245",
         "Bedrooms": "4",
         "Bathrooms": "1"
     },
@@ -13,7 +13,7 @@
         "Property Address": "123 Test amount v5",
         "Account Number": "ACC-460328",
         "Property Type": "Apartment",
-        "Monthly Rent": "3,000.00",
+        "Monthly Rent": "3000",
         "Bedrooms": "2",
         "Bathrooms": "1"
     },
@@ -22,7 +22,16 @@
         "Property Address": "123 New day street",
         "Account Number": "ACC-286028",
         "Property Type": "Flat",
-        "Monthly Rent": "2,300.00",
+        "Monthly Rent": "2300",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Occupied",
+        "Property Address": "123 Testing Decimal Fomat Street",
+        "Account Number": "ACC-434646",
+        "Property Type": "Flat",
+        "Monthly Rent": "2322",
         "Bedrooms": "2",
         "Bathrooms": "1"
     }

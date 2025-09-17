@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -104,11 +105,12 @@ public class PropertyRentalReport extends JPanel
             for (int i = 0; i < jsonArray.length(); i++) 
             {
                 JSONObject property = jsonArray.getJSONObject(i);                                   //-Gets each property object
+                DecimalFormat currency = new DecimalFormat("#,##0.00");                                   //-Formats numbers to 2 decimal places
                 table.addRow(new Object[]                                                           //-Adds a new row to the table with property details
                 {
-                    property.optString("Account Number"),                                           
-                    property.optString("Property Address"), 
-                    property.optString("Monthly Rent"),
+                    property.optString("Account Number"),
+                    property.optString("Property Address"),
+                    currency.format(property.optDouble("Monthly Rent")),                              //-Displays the monthly rent with 2 decimal places
                     property.optString("Property Type"),
                     property.optString("Bedrooms"),
                     property.optString("Bathrooms"),
