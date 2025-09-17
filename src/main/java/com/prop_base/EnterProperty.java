@@ -9,6 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * EnterProperty is a JPanel that contains EnterPropertyCard and handles all logic:
+ * - Save property details to JSON
+ */
 public class EnterProperty extends JPanel 
 {
     public EnterProperty() 
@@ -16,7 +20,7 @@ public class EnterProperty extends JPanel
     
     //-Step 1: Create the UI card
         EnterPropertyCard card = new EnterPropertyCard();
-        add(card);
+        add(card);                                                                                  //-Adds the card to the panel
 
     //-Step 2: Access the save button
         JButton saveBtn = card.getSaveButton(); 

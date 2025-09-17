@@ -35,14 +35,14 @@ public class SearchPropertyCard extends JPanel
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setPreferredSize(new Dimension(700, 400));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
+        GridBagConstraints cardProperties = new GridBagConstraints();                               //-Instantiate GridBagConstraints with a cardProperties object
+        cardProperties.insets = new Insets(10, 10, 10, 10);
+        cardProperties.fill = GridBagConstraints.HORIZONTAL;
+        cardProperties.weightx = 1;
 
         int row = 0;                                                                                //-Current row
 
-    GridBagConstraints cardProperties = new GridBagConstraints();                                   //-Instantiate GridBagConstraints with a cardProperties object
+                                  
         cardProperties.insets = new Insets(10, 10, 10, 10);                                         //-Padding around the component
         cardProperties.fill = GridBagConstraints.HORIZONTAL;                                        //-Tells the layout manager how the component should resize inside its cell.
         

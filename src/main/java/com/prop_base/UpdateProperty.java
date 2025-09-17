@@ -8,9 +8,16 @@ import javax.swing.JPanel;
 
 import org.json.JSONObject;
 
+/**
+ * UpdateProperty is a JPanel that contains UpdatePropertyCard and handles all logic:
+ * - Reads the JSON file
+ * - Searches property by account number
+ * - Loads JSON into the results table (allows for updates)
+ * - Saves updated property details to JSON
+ */
 public class UpdateProperty extends JPanel 
 {
-    private final UpdatePropertyCard card;
+    private UpdatePropertyCard card;
     private int currentIndex = -1;
 
     public UpdateProperty() 
@@ -27,7 +34,6 @@ public class UpdateProperty extends JPanel
     }
 
     
-
     /**
      * Searches the JSON file for a property by its account number
      * If there's a match, populates the fields with the property details

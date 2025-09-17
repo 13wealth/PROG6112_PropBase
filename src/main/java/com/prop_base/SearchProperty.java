@@ -7,14 +7,18 @@ import javax.swing.JPanel;
 
 import org.json.JSONObject;
 
+/**
+ * SearchProperty is a JPanel that contains SearchPropertyCard and handles all logic:
+ * - Reads the JSON file
+ * - Searches property by account number
+ * - Loads JSON into the results table
+ */
 public class SearchProperty extends JPanel 
 {
-    private final SearchPropertyCard card;
-
     public SearchProperty() 
     {
         setLayout(new BorderLayout());
-        card = new SearchPropertyCard();
+        SearchPropertyCard card = new SearchPropertyCard();
         add(card, BorderLayout.CENTER);
 
     //-Hooks the search button to the search functionality

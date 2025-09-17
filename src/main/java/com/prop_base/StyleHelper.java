@@ -364,16 +364,19 @@ public class StyleHelper extends JPanel
 
 
     /**
-    * Creates a label + text field pair in a given row of your layout
-    * @param label
-    * @param row
-    * @return
-    * Styling was assisted by Open AI
-    */
-    public static JTextField addLabeledField(JPanel parent, String label, int row) 
+     * Creates a label + text field pair in a given row of your layout.
+     * If an existing field is passed in, it will be used; otherwise, a new one is created.
+     *
+     * @param parent The panel to add components to
+     * @param label  The label text
+     * @param field  The JTextField to use (or null to create a new one)
+     * @param row    The row in the GridBagLayout
+     * @return       The JTextField added to the UI (either existing or newly created)
+     */
+    public static JTextField addLabeledField(JPanel parent, String label, JTextField field, int row) 
     {
         GridBagConstraints controls = new GridBagConstraints();
-        controls.insets = new Insets(8, 8, 8, 8);                                                   //-Set padding for components
+        controls.insets = new Insets(10, 10, 10, 10);                                               //-Set padding for components
         controls.fill = GridBagConstraints.HORIZONTAL;                                              //-Make components stretch horizontally
         controls.weightx = 1;                                                                       //-Allow components to grow horizontally
 
@@ -383,11 +386,16 @@ public class StyleHelper extends JPanel
         parent.add(new JLabel(label), controls);                                                    //-Add label to the panel
 
     //-Field
-        JTextField field = new JTextField(20);                                                      //-Create a text field with 20 columns
-        field.setBorder(new LineBorder(Color.GRAY, 1, true));                                       //-Full gray border with rounded corners
-        field.setBackground(Color.WHITE);
-        controls.gridx = 1;                                                                         //-places the text field in the second column
-        parent.add(field, controls);
+        if (field == null)                                                                          //-If no field is provided
+        {
+            field = new JTextField(20);                                                             //-Create one if not provided
+        }
+
+            field.setBorder(new LineBorder(Color.GRAY, 1, true));                                   //-Set border for the field with rounded corners and a gray color
+            field.setBackground(Color.WHITE);
+
+            controls.gridx = 1;                                                                     //-Places the field in the second column
+            parent.add(field, controls);                                                            //-Add field to the panel
 
         return field;
     }

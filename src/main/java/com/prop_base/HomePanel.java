@@ -54,6 +54,13 @@ public class HomePanel  extends JPanel                                          
             displayPanel.addScreen(new UpdateProperty());
         });
 
+    //+++ DELETE PROPERTY
+        JButton deleteProp = sidebarPanel.getDeletePropertyButton();
+        deleteProp.addActionListener(e ->
+        {
+            displayPanel.addScreen(new DeleteProperty());
+        });
+
         //+++ EXIT BUTTON
         //sidebarPanel.getExitButton().addActionListener(e -> System.exit(0));                        //-When the "Exit" button is clicked, exit the application
 

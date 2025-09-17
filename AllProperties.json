@@ -1,262 +1,29 @@
 [
-    {
-        "Status": "Occupied",
-        "Property Address": "11927 Woodpecker Street",
-        "Account Number": "ACC-623972",
-        "Property Type": "House",
-        "Monthly Rent": "5725",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "11927 Woodpecker Street",
-        "Account Number": "ACC-623972",
-        "Property Type": "House",
-        "Monthly Rent": "5725",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Maintenance",
-        "Property Address": "12123 Flow Street",
-        "Account Number": "ACC-805809",
-        "Property Type": "House",
-        "Monthly Rent": "3245",
-        "Bedrooms": "4",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Maintenance",
-        "Property Address": "12 Dentist Street",
-        "Account Number": "ACC-805809",
-        "Property Type": "Flat",
-        "Monthly Rent": "3245",
-        "Bedrooms": "1",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "addddddddsa",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "234d",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "safffs",
-        "Bedrooms": "",
-        "Bathrooms": ""
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "safffs",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "safffs",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "123r",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000",
-        "Bedrooms": "3b",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000",
-        "Bedrooms": "3",
-        "Bathrooms": "1a"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000",
-        "Bedrooms": "3",
-        "Bathrooms": "1.1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000",
-        "Bedrooms": "3.1",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000.45s",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000.45",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000d",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000f",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "123 Test amount validation v4 Street",
-        "Account Number": "ACC-226735",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000f",
-        "Bedrooms": "3",
-        "Bathrooms": "2"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "123 Test amount v5",
-        "Account Number": "ACC-460328",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000b",
-        "Bedrooms": "2.1",
-        "Bathrooms": "1.1"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "123 Test validation V6 Street",
-        "Account Number": "ACC-510723",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "123 Test validation V7 Street",
-        "Account Number": "ACC-510723",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3000.60",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "123 Validation Test V9 Street",
-        "Account Number": "ACC-932531",
-        "Property Type": "Apartment",
-        "Monthly Rent": "4500.57",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Address": "123 Final Feild validation test Street",
-        "Account Number": "ACC-632339",
-        "Property Type": "Flat",
-        "Monthly Rent": "4569.67",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3451.34",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3451.34",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3451.34",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3568",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "3568",
-        "Bedrooms": "3",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "1",
-        "Bedrooms": "1",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "1",
-        "Bedrooms": "1",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "1",
-        "Bedrooms": "1",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Available",
-        "Property Type": "Apartment",
-        "Monthly Rent": "1",
-        "Bedrooms": "1",
-        "Bathrooms": "1"
-    },
-    {
-        "Status": "Occupied",
-        "Property Address": "123 Testing Address Saving Street",
-        "Account Number": "ACC-863949",
-        "Property Type": "Flat",
-        "Monthly Rent": "4000",
-        "Bedrooms": "2",
-        "Bathrooms": "1"
-    }
+  {
+    "Status": "Maintenance",
+    "Property Address": "12123 Flow Street",
+    "Account Number": "ACC-805809",
+    "Property Type": "House",
+    "Monthly Rent": "3245",
+    "Bedrooms": "4",
+    "Bathrooms": "1"
+  },
+  {
+    "Status": "Available",
+    "Property Address": "123 Test amount v5",
+    "Account Number": "ACC-460328",
+    "Property Type": "Apartment",
+    "Monthly Rent": "3000b",
+    "Bedrooms": "2.1",
+    "Bathrooms": "1.1"
+  },
+  {
+    "Status": "Occupied (Temp)",
+    "Property Address": "123 New day street",
+    "Account Number": "ACC-286028",
+    "Property Type": "Flat",
+    "Monthly Rent": "2300",
+    "Bedrooms": "2",
+    "Bathrooms": "1"
+  }
 ]

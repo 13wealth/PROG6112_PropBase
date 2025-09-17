@@ -2,9 +2,10 @@ package com.prop_base;
 
 import java.awt.GridLayout;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,6 +28,8 @@ public class ValidationsHelper
     private static String surname;
 
     private static JSONArray propertyArray;
+    private static final String JSON_FILE = "AllProperties.json";
+    
 
     /**
      * Shows a startup panel asking for:
@@ -44,22 +47,22 @@ public class ValidationsHelper
 
         while (true) 
         {
-            JPanel menuPanel = new JPanel(new GridLayout(0, 1));                                    //-Creates a vertical panel for menu items
-            menuPanel.add(new JLabel("<html>Enter '1' to Launch the Application.<br>" +
+            JPanel menuObj = new JPanel(new GridLayout(0, 1));                                      //-Creates a vertical panel for menu items
+            menuObj.add(new JLabel("<html>Enter '1' to Launch the Application.<br>" +
                                      "Enter any other key to exit.</html>"));
         //-Adds the menu items (Labels and Fields)
-            menuPanel.add(new JLabel("Choice:"));
-            menuPanel.add(launchField);
+            menuObj.add(new JLabel("Choice:"));
+            menuObj.add(launchField);
 
-            menuPanel.add(new JLabel("First Name:"));
-            menuPanel.add(nameField);
+            menuObj.add(new JLabel("First Name:"));
+            menuObj.add(nameField);
 
-            menuPanel.add(new JLabel("Surname:"));
-            menuPanel.add(surnameField);
+            menuObj.add(new JLabel("Surname:"));
+            menuObj.add(surnameField);
 
             int result = JOptionPane.showConfirmDialog(
                                                         null,
-                                                        menuPanel,
+                                                        menuObj,
                                                         "PROPBASE STARTUP",
                                                         JOptionPane.OK_CANCEL_OPTION,
                                                         JOptionPane.PLAIN_MESSAGE
@@ -99,33 +102,33 @@ public class ValidationsHelper
     public static void saveToJson(EnterPropertyCard card) 
     {
     try {
-        File file = new File("AllProperties.json");                                                 //-File to save properties
-        
-        if (file.exists() && file.length() > 0)                                                     //-If file exists and is not empty, load it
+        File saveObj = new File(JSON_FILE);                                                         //-File to save properties
+
+        if (saveObj.exists() && saveObj.length() > 0)                                               //-If file exists and is not empty, load it
         {
-            String details = new String(Files.readAllBytes(file.toPath()));                         //-Reads the file content
-            propertyArray = new JSONArray(details);                                                 //-Parses the content to a JSON array
+            String detailsObj = new String(Files.readAllBytes(saveObj.toPath()));                   //-Reads the file content
+            propertyArray = new JSONArray(detailsObj);                                              //-Parses the content to a JSON array
         } else {
             propertyArray = new JSONArray();                                                        //-Creates a new JSON array if file doesn't exist or is empty
         }
 
     //-Creates a new property object
-        JSONObject property = new JSONObject();
-        property.put("Property Address", card.getFieldValue("Property Address"));
-        property.put("Monthly Rent", card.getFieldValue("Monthly Rent"));
-        property.put("Property Type", card.getFieldValue("Property Type"));
-        property.put("Bedrooms", card.getFieldValue("Bedrooms"));
-        property.put("Bathrooms", card.getFieldValue("Bathrooms"));
-        property.put("Status", card.getFieldValue("Status"));
-        property.put("Account Number", card.getFieldValue("Account Number"));
+        JSONObject propertyObj = new JSONObject();
+        propertyObj.put("Property Address", card.getFieldValue("Property Address"));
+        propertyObj.put("Monthly Rent", card.getFieldValue("Monthly Rent"));
+        propertyObj.put("Property Type", card.getFieldValue("Property Type"));
+        propertyObj.put("Bedrooms", card.getFieldValue("Bedrooms"));
+        propertyObj.put("Bathrooms", card.getFieldValue("Bathrooms"));
+        propertyObj.put("Status", card.getFieldValue("Status"));
+        propertyObj.put("Account Number", card.getFieldValue("Account Number"));
 
     //-Adds to array
-        propertyArray.put(property);
+        propertyArray.put(propertyObj);
 
     //-Saves back to file (overwrite with full array)
-        try (FileWriter writer = new FileWriter(file)) 
+        try (FileWriter writerObj = new FileWriter(saveObj)) 
         {
-            writer.write(propertyArray.toString(4));                                   //-Prints the JSON array to the file with 4-space indentation
+            writerObj.write(propertyArray.toString(4));                                //-Prints the JSON array to the file with 4-space indentation
         }
             JOptionPane.showMessageDialog(null,
                 "Property saved successfully!",
@@ -146,18 +149,18 @@ public class ValidationsHelper
     public static JSONObject searchPropertyByAccount(String accountNumber) 
     {
         try {
-            File file = new File("AllProperties.json");
-            if (!file.exists()) return null;
+            File searchObj = new File(JSON_FILE);                                                   //-File to read properties
+            if (!searchObj.exists()) return null;                                                   //-If file does not exist return null
 
-            String content = new String(Files.readAllBytes(Paths.get("AllProperties.json")));
-            JSONArray arr = new JSONArray(content);
+            String contentObj = new String(Files.readAllBytes(searchObj.toPath()));                 //-Reads the json file content
+            JSONArray arrayObj = new JSONArray(contentObj);                                         //-Parses the content to a JSON array object
 
-            for (int i = 0; i < arr.length(); i++) 
+            for (int i = 0; i < arrayObj.length(); i++) 
             {
-                JSONObject obj = arr.getJSONObject(i);
-                if (accountNumber.equals(obj.optString("Account Number"))) 
+                JSONObject IterObj = arrayObj.getJSONObject(i);
+                if (accountNumber.equals(IterObj.optString("Account Number"))) 
                 {
-                    return obj;
+                    return IterObj;
                 }
             }
                 } catch (Exception ex) {
@@ -180,12 +183,12 @@ public class ValidationsHelper
                 "Bedrooms", "Bathrooms", "Status", "Account Number"
             };
 
-        DefaultTableModel model = new DefaultTableModel(columns, 0);                                //-Create a table model with the defined columns
+        DefaultTableModel tableObj = new DefaultTableModel(columns, 0);                             //-Create a table model with the defined columns
 
         if (property != null) 
         {
             Object[] row = 
-            {
+            {                                                                                       //-Creates a new row with property details
                 property.optString("Property Address"), 
                 property.optString("Monthly Rent"),
                 property.optString("Property Type"),
@@ -194,28 +197,28 @@ public class ValidationsHelper
                 property.optString("Status"),
                 property.optString("Account Number")
             };
-            model.addRow(row);                                                                      //-Adds the property details to the table model
+            tableObj.addRow(row);                                                                   //-Adds the property details to the table model
         }
-        table.setModel(model);                                                                      //-Sets the table model to the results
+        table.setModel(tableObj);                                                                   //-Sets the table model to the results
     }
 
     
     /**
-     * Loads property data from the JSON file
+     * Populates property data from the JSON file
      */
     public static void loadProperties() 
     {
         try 
         {
-            File file = new File("AllProperties.json");
-            if (!file.exists() || file.length() == 0)                                               //-File doesn't exist or is empty
+            File loadObj = new File(JSON_FILE);
+            if (!loadObj.exists() || loadObj.length() == 0)                                         //-File doesn't exist or is empty
             {
                 propertyArray = new JSONArray(); 
                     return;                                                                         //-Stop loading if file is empty
             }
-            
-            String content = new String(Files.readAllBytes(file.toPath()));                         //-Reads the Json file 
-            propertyArray = new JSONArray(content);                                                 //-Parses the Json file content into a JSONArray
+
+            String contentObj = new String(Files.readAllBytes(loadObj.toPath()));                   //-Reads the Json file 
+            propertyArray = new JSONArray(contentObj);                                              //-Parses the Json file content into a JSONArray
         } catch (Exception ex) {
             ex.printStackTrace();                                                                   //-Prints the stack trace for debugging
             propertyArray = new JSONArray();                                                        //-Initializes an empty JSONArray if an error occurs
@@ -232,10 +235,10 @@ public class ValidationsHelper
      * @return              True if the field is valid, false otherwise.
      */
     public static boolean amountValidation(
-                                                    JTextField field, 
-                                                    String fieldName, 
-                                                    boolean allowDecimal
-                                                  ) 
+                                            JTextField field, 
+                                            String fieldName, 
+                                            boolean allowDecimal
+                                          ) 
     {
         String text = field.getText().trim();
 
@@ -243,13 +246,13 @@ public class ValidationsHelper
         {
             JOptionPane.showMessageDialog(field, fieldName + " cannot be empty.",
                                            "Validation Error", JOptionPane.ERROR_MESSAGE);
-            field.requestFocus();                                                                   //-Set focus back to the field
-            return false;                                                                           //-Field is invalid
+                field.requestFocus();                                                               //-Set focus back to the field
+                    return false;                                                                   //-Field is invalid
         }
 
         try 
         {
-            if (allowDecimal) 
+            if (allowDecimal)                                                                       //-Allow decimal numbers
             {
                 Double.parseDouble(text);                                                           //-Converts a string to a decimal number
             } else {
@@ -264,9 +267,63 @@ public class ValidationsHelper
             return false;                                                                           //-Field is invalid
         }
     }
- 
 
 
+    /**
+     * Deletes a property by account number
+     * @param accountNumber The account number of the property to delete
+     * @return True if the property was deleted, false otherwise
+     */
+    public static boolean deletePropertyByAccount(String accountNumber) 
+    {
+        File deleteObj = new File(JSON_FILE);
+        if (!deleteObj.exists()) return false;                                                      //-File does not exist return false and log the error
+
+        try (FileReader readerObj = new FileReader(deleteObj))                                      //-Reads the JSON file
+        {
+            JSONArray arrayObj = new JSONArray(new org.json.JSONTokener(readerObj));                //-Parses the JSON file into a JSONArray after reading
+            boolean found = false;                                                                  //-Flag to indicate if the property was found
+            JSONArray updateObj = new JSONArray();                                                  //-Object to hold updated properties array
+
+            for (int i = 0; i < arrayObj.length(); i++) 
+            {
+                JSONObject IterObj = arrayObj.getJSONObject(i); 
+                if (accountNumber.equals(IterObj.optString("Account Number")))                  //-If input account number matches the Json key
+                {
+                    found = true;                                                                   //-Mark as found and skip this object to delete
+                } else {
+                    updateObj.put(IterObj);                                                         //-Add to updated properties array
+                }
+            }
+
+            if (found) 
+            {
+                try (FileWriter writerObj = new FileWriter(deleteObj))                              //-Open FileWriter to write updated JSON
+                {
+                    writerObj.write(updateObj.toString(2));                             //-Overwrite JSON with indentation of 2 spaces
+                }
+            }
+
+            return found;                                                                           //-Return true if property was found and deleted
+
+        } catch (IOException e) {
+            e.printStackTrace();                                                                    //-Log the error
+            return false;
+        }
+    }
+    
+        
+    /**
+     * Clears the results table
+     * @param table The JTable to clear
+     */
+    public static void clearResultsTable(JTable table) 
+    {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();                             //-Gets the table model
+        model.setRowCount(0);                                                                       //-Clears all rows from the table
+    }
+    
+    
     /**
      * Getters to access private static variables
      * @return
