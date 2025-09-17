@@ -75,7 +75,7 @@ public class SideBarPanel extends JPanel
     public JButton getSearchPropertiesButton() { return sidebarButton.get("Search Properties"); }
     public JButton getUpdatePropertyButton() { return sidebarButton.get("Update Property"); }
     public JButton getDeletePropertyButton() { return sidebarButton.get("Delete Property"); }
-    public JButton getPrintAllPropertiesButton() { return sidebarButton.get("Print All Properties"); }
+    public JButton getPropertyRentalReportButton() { return sidebarButton.get("Print All Properties"); }
     public JButton getLogoutButton() { return sidebarButton.get("Logout"); }
 
 }

@@ -17,7 +17,7 @@ public class DisplayPanel extends JPanel
     }
     
     /**
-     * Method is called to display a form to capture new property
+     * Methods for managing screens in the display panel
      * @param screen
      */
     public void addScreen(JPanel screen) 

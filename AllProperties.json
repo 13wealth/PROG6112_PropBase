@@ -1,29 +1,29 @@
 [
-  {
-    "Status": "Maintenance",
-    "Property Address": "12123 Flow Street",
-    "Account Number": "ACC-805809",
-    "Property Type": "House",
-    "Monthly Rent": "3245",
-    "Bedrooms": "4",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Available",
-    "Property Address": "123 Test amount v5",
-    "Account Number": "ACC-460328",
-    "Property Type": "Apartment",
-    "Monthly Rent": "3000b",
-    "Bedrooms": "2.1",
-    "Bathrooms": "1.1"
-  },
-  {
-    "Status": "Occupied (Temp)",
-    "Property Address": "123 New day street",
-    "Account Number": "ACC-286028",
-    "Property Type": "Flat",
-    "Monthly Rent": "2300",
-    "Bedrooms": "2",
-    "Bathrooms": "1"
-  }
+    {
+        "Status": "Maintenance",
+        "Property Address": "12123 Flow Street",
+        "Account Number": "ACC-805809",
+        "Property Type": "House",
+        "Monthly Rent": "3,245.00",
+        "Bedrooms": "4",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Property Address": "123 Test amount v5",
+        "Account Number": "ACC-460328",
+        "Property Type": "Apartment",
+        "Monthly Rent": "3,000.00",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Occupied",
+        "Property Address": "123 New day street",
+        "Account Number": "ACC-286028",
+        "Property Type": "Flat",
+        "Monthly Rent": "2,300.00",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    }
 ]

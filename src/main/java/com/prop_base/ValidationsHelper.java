@@ -179,23 +179,23 @@ public class ValidationsHelper
         {
             String[] columns =                                                                      //-Define the column names
             {
-                "Property Address", "Monthly Rent", "Type",
-                "Bedrooms", "Bathrooms", "Status", "Account Number"
+                "Account", "Address", "Monthly Rent", "Type",
+                "Bedrooms", "Bathrooms", "Status"
             };
 
         DefaultTableModel tableObj = new DefaultTableModel(columns, 0);                             //-Create a table model with the defined columns
 
-        if (property != null) 
+        if (property != null)                                                                       //-If search is successful
         {
-            Object[] row = 
-            {                                                                                       //-Creates a new row with property details
+            Object[] row =                                                                          //-Populate these keys from the property JSONObject
+            {                
+                property.optString("Account Number"),                                           
                 property.optString("Property Address"), 
                 property.optString("Monthly Rent"),
                 property.optString("Property Type"),
                 property.optString("Bedrooms"),
                 property.optString("Bathrooms"),
                 property.optString("Status"),
-                property.optString("Account Number")
             };
             tableObj.addRow(row);                                                                   //-Adds the property details to the table model
         }
