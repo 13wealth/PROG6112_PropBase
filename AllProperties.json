@@ -34,5 +34,23 @@
         "Monthly Rent": "2322",
         "Bedrooms": "2",
         "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Property Address": "123 Test after Deploy Street",
+        "Account Number": "ACC-208654",
+        "Property Type": "Apartment",
+        "Monthly Rent": "2 354,00",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Property Address": "123 Rent >1500 Streey",
+        "Account Number": "ACC-795785",
+        "Property Type": "TownHouse",
+        "Monthly Rent": "1500.90 ",
+        "Bedrooms": "3",
+        "Bathrooms": "2"
     }
 ]

@@ -227,6 +227,62 @@ public class ValidationsHelper
         }
     }
     
+      /**
+     * Validates a number input field
+     * 
+     * @param field         The text field to validate
+     * @param fieldName     The name of the field (for error messages)
+     * @param allowDecimal  Whether to allow decimal numbers
+     * @return              True if the field is valid, false otherwise.
+     */
+    public static boolean PropertyAmountValidation(
+                                                    JTextField field, 
+                                                    String fieldName, 
+                                                    boolean allowDecimal
+                                                  ) 
+    {
+        while (true)                                                                                //-Keep looping until valid input is entered 
+        { 
+            String text = field.getText().trim();                                                   //-Gets the trimmed text from the text field
+
+            if (text.isEmpty())                                                                     //-Checks if the field is empty
+            {
+                JOptionPane.showMessageDialog(field, fieldName + " cannot be empty.",
+                                            "Validation Error", JOptionPane.ERROR_MESSAGE);
+                field.requestFocus();
+                    return false;                                                                   //-Stop if empty (or you can continue loop if you want to reprompt)
+            }
+
+            try {
+                
+                double rentValue;
+                
+                if (allowDecimal) 
+                {
+                    rentValue = Double.parseDouble(text);                                           //-Accept decimal values
+                } else {
+                    rentValue = Integer.parseInt(text);                                             //-Accept whole numbers
+                }
+
+                if (rentValue < 1500)                                                              //-Checks if the minimum value is 1500
+                { 
+                    JOptionPane.showMessageDialog(field, fieldName + " must be greater than 1500.",
+                                                "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    field.requestFocus();                                                           //-Set focus back to the field
+                        return false;                                                               //-Stop or continue loop if reprompting
+                }
+                    return true;                                                                    //-If valid number and greater than 1500
+
+            } catch (NumberFormatException x) {
+                JOptionPane.showMessageDialog(field, fieldName + " must be a valid " +
+                                            (allowDecimal ? "number." : "whole number."),
+                                            "Validation Error", JOptionPane.ERROR_MESSAGE);
+                field.requestFocus();
+                    return false;                                                                   //-Stop or continue loop if reprompting
+            }
+        }
+    }
+
     
     /**
      * Validates a number input field

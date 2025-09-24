@@ -52,7 +52,7 @@ public class EnterProperty extends JPanel
                 }
 
             //-Validates numeric fields
-                if (!ValidationsHelper.amountValidation(rentField, "Monthly Rent", true)) return;
+                if (!ValidationsHelper.PropertyAmountValidation(rentField, "Monthly Rent", true)) return;
                 if (!ValidationsHelper.amountValidation(bedroomsField, "Bedrooms", false)) return;
                 if (!ValidationsHelper.amountValidation(bathroomsField, "Bathrooms", false)) return;
 
