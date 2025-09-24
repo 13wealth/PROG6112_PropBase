@@ -55,11 +55,12 @@ public class DeleteProperty extends JPanel
             }
         });
 
+
     //-Sets up Action Listener for Delete button to delete property
         card.getDeleteButton().addActionListener(e -> 
         {
             String query = card.getDeleteQuery();                                                   //-Gets the account number from the text field
-            if (query.isEmpty())                                                                    //-Validates that the field is not empty
+            if (query.isEmpty())                                                                    //-Checks if the field is empty on delete button click
             {
                 JOptionPane.showMessageDialog(null,
                         "Please enter an Account Number to delete.",

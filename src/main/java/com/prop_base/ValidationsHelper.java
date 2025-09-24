@@ -188,7 +188,7 @@ public class ValidationsHelper
 
         if (property != null)                                                                       //-If search is successful
         {
-            DecimalFormat currency = new DecimalFormat("#,##0.00");                                 //-Formats numbers to 2 decimal places
+            DecimalFormat currency = new DecimalFormat("####.00");                                  //-Formats numbers to 2 decimal places
             Object[] row =                                                                          //-Populate these keys from the property JSONObject
             {                
                 property.optString("Account Number"),                                           
@@ -254,7 +254,7 @@ public class ValidationsHelper
             }
 
             try {
-                
+
                 double rentValue;
                 
                 if (allowDecimal) 
@@ -264,7 +264,7 @@ public class ValidationsHelper
                     rentValue = Integer.parseInt(text);                                             //-Accept whole numbers
                 }
 
-                if (rentValue < 1500)                                                              //-Checks if the minimum value is 1500
+                if (rentValue < 1500)                                                               //-Checks if the minimum value is 1500
                 { 
                     JOptionPane.showMessageDialog(field, fieldName + " must be greater than 1500.",
                                                 "Validation Error", JOptionPane.ERROR_MESSAGE);
@@ -292,7 +292,7 @@ public class ValidationsHelper
      * @param allowDecimal  Whether to allow decimal numbers
      * @return              True if the field is valid, false otherwise.
      */
-    public static boolean amountValidation(
+    public static boolean NumberValidation(
                                             JTextField field, 
                                             String fieldName, 
                                             boolean allowDecimal

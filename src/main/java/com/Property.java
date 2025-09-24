@@ -4,10 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import com.prop_base.HomePanel;
-//import com.prop_base.ValidationsHelper;
+import com.prop_base.ValidationsHelper;
 
 
-public class PropertyBase 
+public class Property 
 {
     /**
      * Main method to launch the Property Base application
@@ -17,7 +17,7 @@ public class PropertyBase
     public static void main(String[] args) 
     {
        
-        //ValidationsHelper.startMenu();
+        ValidationsHelper.startMenu();
         SwingUtilities.invokeLater(() -> 
         {                                                      
             JFrame appWindow = new JFrame("Property Management System");                            //-Creates JFrame application window called "appWindow"

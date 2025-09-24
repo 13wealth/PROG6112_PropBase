@@ -13,7 +13,7 @@
         "Property Address": "123 Test amount v5",
         "Account Number": "ACC-460328",
         "Property Type": "Apartment",
-        "Monthly Rent": "3000",
+        "Monthly Rent": "1500",
         "Bedrooms": "2",
         "Bathrooms": "1"
     },
@@ -40,7 +40,7 @@
         "Property Address": "123 Test after Deploy Street",
         "Account Number": "ACC-208654",
         "Property Type": "Apartment",
-        "Monthly Rent": "2 354,00",
+        "Monthly Rent": "3400",
         "Bedrooms": "2",
         "Bathrooms": "1"
     },
@@ -52,5 +52,23 @@
         "Monthly Rent": "1500.90 ",
         "Bedrooms": "3",
         "Bathrooms": "2"
+    },
+    {
+        "Status": "Available",
+        "Property Address": "123 Test with Wife Street",
+        "Account Number": "ACC-276096",
+        "Property Type": "Flat",
+        "Monthly Rent": "1499",
+        "Bedrooms": "1",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Property Address": "Test Decimals",
+        "Account Number": "ACC-908487",
+        "Property Type": "Apartment",
+        "Monthly Rent": "1500",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
     }
 ]

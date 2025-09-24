@@ -53,8 +53,8 @@ public class EnterProperty extends JPanel
 
             //-Validates numeric fields
                 if (!ValidationsHelper.PropertyAmountValidation(rentField, "Monthly Rent", true)) return;
-                if (!ValidationsHelper.amountValidation(bedroomsField, "Bedrooms", false)) return;
-                if (!ValidationsHelper.amountValidation(bathroomsField, "Bathrooms", false)) return;
+                if (!ValidationsHelper.NumberValidation(bedroomsField, "Bedrooms", false)) return;
+                if (!ValidationsHelper.NumberValidation(bathroomsField, "Bathrooms", false)) return;
 
             //-Save to JSON only if validations pass
                 ValidationsHelper.saveToJson(card);

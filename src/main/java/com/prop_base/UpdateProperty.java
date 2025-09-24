@@ -18,7 +18,7 @@ import org.json.JSONObject;
  */
 public class UpdateProperty extends JPanel 
 {
-    private UpdatePropertyCard card;
+    private final UpdatePropertyCard card;
     private int currentIndex = -1;
 
     public UpdateProperty() 
@@ -29,7 +29,6 @@ public class UpdateProperty extends JPanel
 
         ValidationsHelper.loadProperties();                                                         //-Calls a method to load content from the JSON file
 
-        
         card.getSearchButton().addActionListener(e -> searchProperty());                            //-Search for a property
         card.getUpdateButton().addActionListener(e -> updateProperty());                            //-Update the property
     }
@@ -99,6 +98,18 @@ public class UpdateProperty extends JPanel
         if (currentIndex < 0) return;                                                               //-No property selected for update
         try 
         {
+            if (!ValidationsHelper.PropertyAmountValidation(card.getRentField(), 
+                                                            "Monthly Rent", 
+                                                            true
+                )) return;
+            if (!ValidationsHelper.NumberValidation(card.getBedroomsField(), 
+                                                    "Bedrooms", 
+                                                    false
+                )) return;
+            if (!ValidationsHelper.NumberValidation(card.getBathroomsField(), 
+                                                    "Bathrooms", 
+                                                    false
+                )) return;
             JSONObject updateObj = ValidationsHelper.getPropertyArray().getJSONObject(currentIndex);//-Gets the property object at currentIndex
 
         //-Update values from editable fields

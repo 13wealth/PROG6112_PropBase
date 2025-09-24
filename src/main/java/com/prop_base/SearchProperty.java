@@ -35,7 +35,16 @@ public class SearchProperty extends JPanel
             }
 
             JSONObject property = ValidationsHelper.searchPropertyByAccount(query);                 //-Creates a JSON object for the property (Calls the method that searches the property)
-            ValidationsHelper.updateResultsTable(card.getResultsTable(), property);                 //-Updates and displays the results (Calls the method that updates the results table)
+            
+            if (property == null)
+            {
+                JOptionPane.showMessageDialog(null,
+                        "No property found with Account Number: " + query,
+                        "Search Result",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                ValidationsHelper.updateResultsTable(card.getResultsTable(), property);                 //-Updates and displays the results (Calls the method that updates the results table)
+            }
         });
     }    
 }
