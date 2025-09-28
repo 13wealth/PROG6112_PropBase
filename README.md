@@ -37,7 +37,7 @@ com.prop_base/
 ├── test/ (JUnit test cases)
 └── AllProperties.json (data file)
 
-#yaml
+yaml  
 This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
