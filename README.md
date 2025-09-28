@@ -36,3 +36,59 @@ com.prop_base/
 ├── ValidationsHelper.java
 ├── test/ (JUnit test cases)
 └── AllProperties.json (data file)
+
+yaml
+Copy code
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Java 17+  
+- Maven or Gradle (optional, for dependency management)  
+
+### Running the App
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/propbase.git
+   cd propbase
+Make sure AllProperties.json is present in the root directory.
+
+Run the application:
+
+bash
+Copy code
+javac com/prop_base/*.java
+java com.prop_base.MainApp
+🧪 Running Tests
+JUnit tests are located under src/test/java/com/prop_base.
+To run all tests:
+
+bash
+Copy code
+mvn test
+or, if not using Maven, run directly in your IDE (IntelliJ, Eclipse, VSCode).
+
+📊 Data Format (AllProperties.json)
+Example property entry:
+
+json
+Copy code
+[
+  {
+    "Account Number": "P1001",
+    "Property Address": "123 Main St",
+    "Monthly Rent": 1500.00,
+    "Property Type": "Apartment",
+    "Bedrooms": 2,
+    "Bathrooms": 1,
+    "Status": "Available",
+    "Agent": "John Smith"
+  }
+]
+📖 References
+OpenAI. (2025, September). ChatGPT (Version GPT-5) [Large language model]. https://chat.openai.com
+
+👨‍💻 Author
+Smith Mbele – Student Developer
