@@ -10,15 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * EnterProperty is a JPanel that contains EnterPropertyCard and handles all logic:
+ * EnterProperty is a logic method to
  * - Save property details to JSON
  */
 public class EnterProperty extends JPanel 
 {
     public EnterProperty() 
     {
-    
-    //-Step 1: Create the UI card
+    //-Step 1: Instantiates the method that creates the card for capturing property details
         EnterPropertyCard card = new EnterPropertyCard();
         add(card);                                                                                  //-Adds the card to the panel
 
@@ -27,20 +26,21 @@ public class EnterProperty extends JPanel
         saveBtn.setBackground(Color.BLUE);
         saveBtn.setForeground(Color.WHITE);
 
-    //-Step 3: Add the logic in the parent class
+    //-Step 3: Add the logic in the parent class when a user clicks the save button
         saveBtn.addActionListener(new ActionListener() 
         {
-            @Override
+            @Override                                                                               //-Override the actionPerformed method to define custom behavior when the button is clicked
             public void actionPerformed(ActionEvent a) 
             {
 
-            //-Access the fields from the card's component map
-                JTextField rentField = (JTextField) card.getComponentMap().get("Monthly Rent");
-                JTextField bedroomsField = (JTextField) card.getComponentMap().get("Bedrooms");
-                JTextField bathroomsField = (JTextField) card.getComponentMap().get("Bathrooms");
-                JTextField addressField = (JTextField) card.getComponentMap().get("Property Address");
+         //-Access the fields from the card's component map
+            JTextField addressField = (JTextField) card.getComponentMap().get("Property Address");
+            JTextField rentField = (JTextField) card.getComponentMap().get("Monthly Rent");
+            JTextField bedroomsField = (JTextField) card.getComponentMap().get("Bedrooms");
+            JTextField bathroomsField = (JTextField) card.getComponentMap().get("Bathrooms");
+            JTextField agentField = (JTextField) card.getComponentMap().get("Agent");
 
-            //-Validate required text fields
+            //-Validate address field
                 if (addressField.getText().trim().isEmpty()) 
                 {
                     JOptionPane.showMessageDialog(EnterProperty.this,
@@ -51,7 +51,7 @@ public class EnterProperty extends JPanel
                     return;
                 }
 
-            //-Validates numeric fields
+            //-More validations for numeric fields
                 if (!ValidationsHelper.PropertyAmountValidation(rentField, "Monthly Rent", true)) return;
                 if (!ValidationsHelper.NumberValidation(bedroomsField, "Bedrooms", false)) return;
                 if (!ValidationsHelper.NumberValidation(bathroomsField, "Bathrooms", false)) return;

@@ -115,13 +115,14 @@ public class ValidationsHelper
 
     //-Creates a new property object
         JSONObject propertyObj = new JSONObject();
+        propertyObj.put("Account Number", card.getFieldValue("Account Number"));
         propertyObj.put("Property Address", card.getFieldValue("Property Address"));
         propertyObj.put("Monthly Rent", card.getFieldValue("Monthly Rent"));
         propertyObj.put("Property Type", card.getFieldValue("Property Type"));
         propertyObj.put("Bedrooms", card.getFieldValue("Bedrooms"));
         propertyObj.put("Bathrooms", card.getFieldValue("Bathrooms"));
         propertyObj.put("Status", card.getFieldValue("Status"));
-        propertyObj.put("Account Number", card.getFieldValue("Account Number"));
+        propertyObj.put("Agent", card.getFieldValue("Agent"));
 
     //-Adds to array
         propertyArray.put(propertyObj);
@@ -141,36 +142,6 @@ public class ValidationsHelper
         }
     }
 
-    
-    /**
-     * Searches for a property by its account number.
-     * @param accountNumber
-     * @return
-     */
-    public static JSONObject searchPropertyByAccount(String accountNumber) 
-    {
-        try {
-            File searchObj = new File(JSON_FILE);                                                   //-File to read properties
-            if (!searchObj.exists()) return null;                                                   //-If file does not exist return null
-
-            String contentObj = new String(Files.readAllBytes(searchObj.toPath()));                 //-Reads the json file content
-            JSONArray arrayObj = new JSONArray(contentObj);                                         //-Parses the content to a JSON array object
-
-            for (int i = 0; i < arrayObj.length(); i++) 
-            {
-                JSONObject IterObj = arrayObj.getJSONObject(i);
-                if (accountNumber.equals(IterObj.optString("Account Number"))) 
-                {
-                    return IterObj;
-                }
-            }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-            }
-                return null;
-        }
-
-
         /**
          * Updates the results table with the given property details
          * @param property
@@ -180,8 +151,8 @@ public class ValidationsHelper
         {
             String[] columns =                                                                      //-Define the column names
             {
-                "Account", "Address", "Monthly Rent", "Type",
-                "Bedrooms", "Bathrooms", "Status"
+                "Account Number", "Address", "Monthly Rent", "Type",
+                "Bedrooms", "Bathrooms", "Status", "Agent"
             };
 
         DefaultTableModel tableObj = new DefaultTableModel(columns, 0);                             //-Create a table model with the defined columns
@@ -198,6 +169,7 @@ public class ValidationsHelper
                 property.optString("Bedrooms"),
                 property.optString("Bathrooms"),
                 property.optString("Status"),
+                property.optString("Agent")
             };
             tableObj.addRow(row);                                                                   //-Adds the property details to the table model
         }
@@ -326,10 +298,40 @@ public class ValidationsHelper
         }
     }
 
+    /**
+     * Searches for a property by its Account Number
+     * Use: ValidationsHelper.searchPropertyByAccount(accountNumber);
+     * Implemented: SearchProperty(), UpdateProperty(), DeleteProperty()
+     * @param accountNumber
+     * @return
+     */
+    public static JSONObject searchPropertyByAccount(String accountNumber) 
+    {
+        try 
+        {
+            File searchObj = new File(JSON_FILE);                                                   //-File to read properties
+            if (!searchObj.exists()) return null;                                                   //-If file does not exist return null
+
+            String contentObj = new String(Files.readAllBytes(searchObj.toPath()));                 //-Reads the json file content
+            JSONArray arrayObj = new JSONArray(contentObj);                                         //-Parses the content to a JSON array object
+
+            for (int i = 0; i < arrayObj.length(); i++) 
+            {
+                JSONObject IterObj = arrayObj.getJSONObject(i);
+                if (accountNumber.equals(IterObj.optString("Account Number"))) 
+                {
+                    return IterObj;
+                }
+            }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+            }
+        return null;
+    }
 
     /**
-     * Deletes a property by account number
-     * @param accountNumber The account number of the property to delete
+     * Deletes a property by Account Number
+     * @param accountNumber The Account Number of the property to delete
      * @return True if the property was deleted, false otherwise
      */
     public static boolean deletePropertyByAccount(String accountNumber) 
@@ -346,7 +348,7 @@ public class ValidationsHelper
             for (int i = 0; i < arrayObj.length(); i++) 
             {
                 JSONObject IterObj = arrayObj.getJSONObject(i); 
-                if (accountNumber.equals(IterObj.optString("Account Number")))                  //-If input account number matches the Json key
+                if (accountNumber.equals(IterObj.optString("Account Number")))                  //-If input Account Number matches the Json key
                 {
                     found = true;                                                                   //-Mark as found and skip this object to delete
                 } else {

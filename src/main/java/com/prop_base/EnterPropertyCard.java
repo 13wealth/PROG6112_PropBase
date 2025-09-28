@@ -47,7 +47,7 @@ public class EnterPropertyCard extends JPanel
         cardProperties.fill = GridBagConstraints.HORIZONTAL;                                        //-Tells the layout manager how the component should resize inside its cell.
         
         cardProperties.weightx = 1;                                                                 //-The card should expand horizontally to take available space when the window is resized
-        int row = 0;
+        int titleRow = 0;
 
     //-Sets the Card title
         cardTitle = StyleHelper.createLabel(
@@ -63,12 +63,12 @@ public class EnterPropertyCard extends JPanel
                                             0, 0
         );
         cardProperties.gridx = 0;                                                                   //-Places the component in Column 0 = First column
-        cardProperties.gridy = row;                                                                 //-Places the component in Row 0 = First row
-        cardProperties.gridwidth = 3;                                                               //-titleLabel will stretch across columns 0, 1, and 2 in the first row
+        cardProperties.gridy = titleRow;                                                            //-Places the component in Row 0 = First row
+        cardProperties.gridwidth = 6;                                                               //-titleLabel will stretch across columns 0, 1, and 2 in the first row
         cardProperties.anchor = GridBagConstraints.CENTER;                                          //-Sets the component's position within its cell
         add(cardTitle, cardProperties);
-        
-        row++;                                                                                      //-Increase row counter by 1
+
+        titleRow++;                                                                                      //-Increase row counter by 1
 
         cardProperties.gridwidth = 1; cardProperties.anchor = GridBagConstraints.WEST;              //-The component will only take 1 cell (column) in the grid
 
@@ -76,84 +76,81 @@ public class EnterPropertyCard extends JPanel
     //-Code assisted by Open AI
         Object[][] fields =                                                                         //-Field definitions using dual arrays
         {
+            {"Account Number", "textfield"},
             {"Property Address", "textfield"},
             {"Monthly Rent", "textfield"},
             {"Property Type", "combobox", new String[]{"Apartment","House","Flat","TownHouse"}},    //-Adds the new property types
             {"Bedrooms", "textfield"},
             {"Bathrooms", "textfield"},
             {"Status", "combobox", new String[]{"Available","Occupied","Maintenance"}},             //-Adds the new property statuses
-            {"Account Number", "textfield"}
+            {"Agent", "textfield"}
         };
-
-        int col = 0;                                                                                //-Column 0 = the first column in the grid
-        JComponent comp;                                                                            //-Declares a component variable
-
-        for (int i = 0; i < fields.length; i++) 
+                                                                                                    
+        int[][] rowMap = {                                                                          //-Maps the fields to their respective rows
+            {0, 1, 2},
+            {3, 4, 5},
+            {6, 7}
+                         };
+        
+        int fieldsRow = 1;                                                                          //-Start at row 1 (row 0 = title)          
+                    
+        for (int[] group : rowMap) 
         {
-            String labelText = (String) fields[i][0];                                               //-Creates the label text
-            String type = (String) fields[i][1];                                                    //-Creates the field type
-
-            cardProperties.gridx = col;                                                             //-Sets the column position
-            cardProperties.gridy = row;                                                             //-Sets the row position
-            add(new JLabel(labelText + ":"), cardProperties);                                       //-Adds the label to the grid
-
-    //-Switch statement for different field types
-            switch (type.toLowerCase())         
+            int col = 0;
+        //-Inner loop for building the fields
+            for (int i : group) 
             {
-                case "textfield":                                                                   //-Switch statement for text fields
-                    comp = new JTextField(10);                                                      //-Creates a text field with 10 columns
-                    StyleHelper.highlightActive(comp);                                                          //-Adds focus highlighting to the component
-                    if ("Account Number".equals(labelText)) 
-                    {
-                        ((JTextField) comp).setText(UIHelper.generateAccountNumber());              //-Calls a method to generate a new account number
-                        ((JTextField) comp).setEditable(false);                                     //-Sets field as a read-only
+                String labelText = (String) fields[i][0];                                           //-Creates the label text
+                String type = (String) fields[i][1];                                                //-Creates the field type
+            //-Adds the label to the grid
+                cardProperties.gridx = col++;                                                           //-Sets the column position
+                cardProperties.gridy = fieldsRow;                                                       //-Sets the row position
+                add(new JLabel(labelText + ":"), cardProperties);                                       //-Adds the label to the grid
+
+            //-Switch statement to build the fields
+                JComponent comp;                                                                        //-Declares a component variable
+                switch (type.toLowerCase())         
+                {
+                    case "textfield" ->                                                                 //-Switch statement for text fields
+                    {                                                                   
+                        comp = new JTextField(10);                                                      //-Creates a text field with 10 columns
+                        StyleHelper.highlightActive(comp);                                              //-Adds focus highlighting to the component
+                        
+                        if ("Account Number".equals(labelText)) 
+                        {
+                            ((JTextField) comp).setText(UIHelper.generateAccountNumber());          //-Calls a method to generate a new account number
+                            ((JTextField) comp).setEditable(false);                                 //-Sets field as a read-only
+                        }
                     }
-                        break;
-                
-                case "combobox":                                                                    //-Switch statement for combo boxes
-                    comp = new JComboBox<>((String[]) fields[i][2]);
-                    break;
-                default:                                                                            //-Default to text area for any other type
-                    comp = new JTextArea(3, 20);                                                    //-Creates a text area
-                    StyleHelper.highlightActive(comp);
-            }
 
-                    cardProperties.gridy = row + 1;                                                 //-Places the component in the next row
-                    add(comp, cardProperties);                                                      //-Adds the component to the grid
-                    components.put(labelText, comp);                                                //-Stores the component in the map with its label as the key
-            col++;                                                                                  //-Move to the next column
-
-    //-Switch for row breaks
-            switch (i) 
-            {
-                case 1:                                                                             //-Checks the value of variable i
-                case 4:                                                                             //-Checks the value of variable i
-                case 5:                                                                             //-Checks the value of variable i
-                    row += 2;                                                                       //-Move to the next row after every 2 fields
-                    col = 0;                                                                        //-Reset column to 0 for the new row
-                break;
+                    case "combobox" -> comp = new JComboBox<>((String[]) fields[i][2]);                 //-Switch statement for combo boxes
+                    default -> 
+                    {
+                        comp = new JTextArea(3, 20);                                                //-Default to 3 rows, 20 columns
+                        StyleHelper.highlightActive(comp);
+                    }
+                }
+            //-Adds field to grid
+                cardProperties.gridx = col++;
+                cardProperties.gridy = fieldsRow;
+                add(comp, cardProperties);
+                components.put(labelText, comp);                                                    //-Maps the label to the component
             }
+            fieldsRow++;
         }
 
     //-The Save button
-        row += 2;                                                                                   //-Move to the next row for the button
-        cardProperties.gridx = 0;                                                                   //-Start at column 0.
-        cardProperties.gridy = row;                                                                 //-Set the row for the button
-        cardProperties.gridwidth = 1;                                                               //-Set the width of the button
+        saveBtn = new JButton("Add Property");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(saveBtn);
+
+        cardProperties.gridx = 0;
+        cardProperties.gridy = fieldsRow + 1;                                                       //-Below last row
+        cardProperties.gridwidth = 6;                                                               //-Span across whole form
         cardProperties.anchor = GridBagConstraints.CENTER;
 
-        saveBtn = new JButton("Add Property");
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));                  //-Creates a panel for the button
-        buttonPanel.setOpaque(false);                                                               //-Makes the panel transparent
-        buttonPanel.add(saveBtn);                                                                   //-Adds the save button to the panel
-
-        cardProperties.gridx = 0;                                                                   //-Set the column for the button
-        cardProperties.gridy = row;                                                                 //-Set the row for the button
-        cardProperties.gridwidth = 3;
-        add(buttonPanel, cardProperties);                                                           //-Adds the button panel to the card
-
-        buttonPanel.add(saveBtn);                                                                   //-Adds the save button to the panel
+        add(buttonPanel, cardProperties);                                                           //-Adds the save button to the panel                                                                                                 
     }
     
     
@@ -174,7 +171,7 @@ public class EnterPropertyCard extends JPanel
 
 
     /**
-     * Gets the current value of any form field (fields, combo boxes, text areas) by using its label
+     * Gets the current value of any form field (fields, combo boxes) by using its label
      * Will be used later for form submission and saving to JSON
      * - Each field in your form has a label (used as a key in your components map)
      * - You call getFieldValue(label) for each field to get the current value as a String
@@ -190,8 +187,6 @@ public class EnterPropertyCard extends JPanel
             return text.getText();
         if (comp instanceof JComboBox<?> dropDown)                                                  //-If component is a JComboBox, return the selected item
             return (String) dropDown.getSelectedItem();
-        if (comp instanceof JTextArea textArea)                                                     //-If component is a JTextArea, return the text entered in the area: textArea.getText()
-            return textArea.getText();
         return null;                                                                                //-If component is not recognized, return null
     }
 

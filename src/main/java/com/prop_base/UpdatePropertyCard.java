@@ -30,6 +30,7 @@ public class UpdatePropertyCard extends JPanel
     private final JTextField bedroomsField;
     private final JTextField bathroomsField;
     private final JTextField statusField;
+    private final JTextField agentField;
 
     public UpdatePropertyCard() 
     {
@@ -101,7 +102,7 @@ public class UpdatePropertyCard extends JPanel
     //-Adds the form fields
         String[] labels = { 
                             "Property Address", "Monthly Rent", "Property Type",
-                            "Bedrooms", "Bathrooms", "Status" 
+                            "Bedrooms", "Bathrooms", "Status", "Agent"
                           };
         JTextField[] fields = new JTextField[labels.length];
 
@@ -117,6 +118,7 @@ public class UpdatePropertyCard extends JPanel
             bedroomsField  = fields[3];
             bathroomsField = fields[4];
             statusField    = fields[5];
+            agentField     = fields[6];
     }
 
     @Override
@@ -143,4 +145,5 @@ public class UpdatePropertyCard extends JPanel
     public JTextField getBedroomsField() { return bedroomsField; }
     public JTextField getBathroomsField() { return bathroomsField; }
     public JTextField getStatusField() { return statusField; }
+    public JTextField getAgentField() { return agentField; }
 }

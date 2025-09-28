@@ -15,6 +15,8 @@ import org.json.JSONObject;
  */
 public class SearchProperty extends JPanel 
 {
+    private static final String JSON_FILE = "AllProperties.json";
+
     public SearchProperty() 
     {
         setLayout(new BorderLayout());

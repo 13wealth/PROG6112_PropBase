@@ -92,8 +92,8 @@ public class PropertyRentalReport extends JPanel
 
     //-Populates the table with data from JSON file
         String[] columnNames = {
-                                "Account", "Address", "Rent", "Type", 
-                                "Bedrooms", "Bathrooms", "Status"
+                                "Property ID", "Address", "Rent", "Type", 
+                                "Bedrooms", "Bathrooms", "Status", "Agent"
                                };
                                
         DefaultTableModel table = new DefaultTableModel(columnNames, 0); 
@@ -105,7 +105,7 @@ public class PropertyRentalReport extends JPanel
             for (int i = 0; i < jsonArray.length(); i++) 
             {
                 JSONObject property = jsonArray.getJSONObject(i);                                   //-Gets each property object
-                DecimalFormat currency = new DecimalFormat("#,##0.00");                                   //-Formats numbers to 2 decimal places
+                DecimalFormat currency = new DecimalFormat("###0.00");                                   //-Formats numbers to 2 decimal places
                 table.addRow(new Object[]                                                           //-Adds a new row to the table with property details
                 {
                     property.optString("Account Number"),
@@ -115,6 +115,7 @@ public class PropertyRentalReport extends JPanel
                     property.optString("Bedrooms"),
                     property.optString("Bathrooms"),
                     property.optString("Status"),
+                    property.optString("Agent")
                 });
             }
         } catch (IOException e) {

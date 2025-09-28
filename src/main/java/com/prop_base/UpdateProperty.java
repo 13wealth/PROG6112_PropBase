@@ -12,7 +12,7 @@ import org.json.JSONObject;
 /**
  * UpdateProperty is a JPanel that contains UpdatePropertyCard and handles all logic:
  * - Reads the JSON file
- * - Searches property by account number
+ * - Searches property by Account Number
  * - Loads JSON into the results table (allows for updates)
  * - Saves updated property details to JSON
  */
@@ -35,14 +35,14 @@ public class UpdateProperty extends JPanel
 
     
     /**
-     * Searches the JSON file for a property by its account number
+     * Searches the JSON file for a property by its Account Number
      * If there's a match, populates the fields with the property details
      * Logic assisted by Open AI
      */
-    private void searchProperty() 
+    public void searchProperty() 
     {
         String accountNumber = card.getAccountField().getText().trim();
-        if (accountNumber.isEmpty())                                                                //-Check if the account number field is empty
+        if (accountNumber.isEmpty())                                                                //-Check if the Account Number field is empty
         {
             JOptionPane.showMessageDialog(this, "Please enter an Account Number.", "Input Error",   //-Prompt error message
                     JOptionPane.WARNING_MESSAGE);
@@ -55,7 +55,7 @@ public class UpdateProperty extends JPanel
         for (int i = 0; i < ValidationsHelper.getPropertyArray().length(); i++)                     //-Iterates through the property array
         {
             JSONObject searchObj = ValidationsHelper.getPropertyArray().getJSONObject(i);           //-Gets the property object at index i
-            if (accountNumber.equals(searchObj.optString("Account Number")))                    //-Checks if the account number matches
+            if (accountNumber.equals(searchObj.optString("Account Number")))                    //-Checks if the Account Number matches
             {
                 property = searchObj;                                                               //-Sets the property to the found object
                 currentIndex = i;                                                                   //-Sets the current index to the found object's index
@@ -77,7 +77,7 @@ public class UpdateProperty extends JPanel
         }
 
     //-Else populate fields if property is found
-        DecimalFormat df = new DecimalFormat("#,##0.00");                                           //-Sets the currency format
+        DecimalFormat df = new DecimalFormat("###0.00");                                           //-Sets the currency format
         
         card.getAddressField().setText(property.optString("Property Address"));
         card.getRentField().setText(df.format(property.optDouble("Monthly Rent")));             //-Formats the rent field
@@ -85,6 +85,7 @@ public class UpdateProperty extends JPanel
         card.getBedroomsField().setText(property.optString("Bedrooms"));
         card.getBathroomsField().setText(property.optString("Bathrooms"));
         card.getStatusField().setText(property.optString("Status"));
+        card.getAgentField().setText(property.optString("Agent"));
         card.getUpdateButton().setEnabled(true);
     }
 
@@ -93,7 +94,7 @@ public class UpdateProperty extends JPanel
      * Updates the property details in the JSON array
      * 
      */
-    private void updateProperty() 
+    public void updateProperty() 
     {
         if (currentIndex < 0) return;                                                               //-No property selected for update
         try 
@@ -119,6 +120,7 @@ public class UpdateProperty extends JPanel
             updateObj.put("Bedrooms", card.getBedroomsField().getText());
             updateObj.put("Bathrooms", card.getBathroomsField().getText());
             updateObj.put("Status", card.getStatusField().getText());
+            updateObj.put("Agent", card.getAgentField().getText());
 
         //-Save back to JSON file
             try (FileWriter writer = new FileWriter("AllProperties.json")) 
@@ -157,8 +159,40 @@ public class UpdateProperty extends JPanel
         card.getBedroomsField().setText("");
         card.getBathroomsField().setText("");
         card.getStatusField().setText("");
+        card.getAgentField().setText("");
+    }
+
+    
+    /**
+     * Updates a property directly in the JSON array.
+     * Backend helper function for JUnit testing purposes
+     * @param index
+     * @param data
+     * @return
+     */
+    public boolean updatePropertyDirect(int index, String[] data) 
+    {
+        try 
+        {
+            JSONObject updateObj = ValidationsHelper.getPropertyArray().getJSONObject(index);
+
+            updateObj.put("Account Number", data[0]);
+            updateObj.put("Property Address", data[1]);
+            updateObj.put("Monthly Rent", data[2]);
+            updateObj.put("Agent", data[3]);
+
+            try (FileWriter writer = new FileWriter("AllProperties.json")) {
+                writer.write(ValidationsHelper.getPropertyArray().toString(4));
+            }
+
+            return true;  // success
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // failed
+    }   
     }
 }
+
 
 
 
