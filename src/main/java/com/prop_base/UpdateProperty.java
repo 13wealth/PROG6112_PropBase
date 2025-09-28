@@ -2,6 +2,7 @@ package com.prop_base;
 
 import java.awt.BorderLayout;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 import javax.swing.JOptionPane;
@@ -137,14 +138,12 @@ public class UpdateProperty extends JPanel
             clearFields();                                                                          //-Clear all fields
             currentIndex = -1;                                                                      //-Reset current index
 
-        } catch (Exception ex) {
-            ex.printStackTrace();                                                                   //-Logs the exception
-            JOptionPane.showMessageDialog(
-                                           this, 
-                                           "Error updating property: " + ex.getMessage(),
-                                           "Error",
-                                            JOptionPane.ERROR_MESSAGE
-            );
+            } catch (IOException | org.json.JSONException ex) {                                     //-Handles I/O and JSON parsing errors
+            ex.printStackTrace(); // Logs the exception
+            JOptionPane.showMessageDialog(this,
+                "Error updating property: " + ex.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -185,11 +184,15 @@ public class UpdateProperty extends JPanel
                 writer.write(ValidationsHelper.getPropertyArray().toString(4));
             }
 
-            return true;  // success
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false; // failed
-    }   
+            return true;
+        } catch (IOException | org.json.JSONException ex) {                                     //-Handles I/O and JSON parsing errors
+            ex.printStackTrace(); // Logs the exception
+            JOptionPane.showMessageDialog(this,
+                "Error updating property: " + ex.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return false;
+        }   
     }
 }
 

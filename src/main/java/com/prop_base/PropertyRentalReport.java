@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -118,10 +119,13 @@ public class PropertyRentalReport extends JPanel
                     property.optString("Agent")
                 });
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | org.json.JSONException ex) {                                         //-Handles I/O and JSON parsing errors
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+            "Error loading property data: " + ex.getMessage(),
+            "Load Error",
+            JOptionPane.ERROR_MESSAGE);
         }
-
         reportTable.setModel(table);                                                                //-Sets the table model to the populated data
     }
 

@@ -102,45 +102,57 @@ public class ValidationsHelper
      */
     public static void saveToJson(EnterPropertyCard card) 
     {
-    try {
         File saveObj = new File(JSON_FILE);                                                         //-File to save properties
-
-        if (saveObj.exists() && saveObj.length() > 0)                                               //-If file exists and is not empty, load it
+        
+        try 
         {
-            String detailsObj = new String(Files.readAllBytes(saveObj.toPath()));                   //-Reads the file content
-            propertyArray = new JSONArray(detailsObj);                                              //-Parses the content to a JSON array
-        } else {
-            propertyArray = new JSONArray();                                                        //-Creates a new JSON array if file doesn't exist or is empty
+            if (saveObj.exists() && saveObj.length() > 0)                                           //-If file exists and is not empty, load it
+            {
+                String detailsObj = new String(Files.readAllBytes(saveObj.toPath()));               //-Reads the file content
+                propertyArray = new JSONArray(detailsObj);                                          //-Parses the content to a JSON array
+            } else {
+                propertyArray = new JSONArray();                                                    //-Creates a new JSON array if file doesn't exist or is empty
+            }
+
+        //-Creates a new property object
+            JSONObject propertyObj = new JSONObject();
+            propertyObj.put("Account Number", card.getFieldValue("Account Number"));
+            propertyObj.put("Property Address", card.getFieldValue("Property Address"));
+            propertyObj.put("Monthly Rent", card.getFieldValue("Monthly Rent"));
+            propertyObj.put("Property Type", card.getFieldValue("Property Type"));
+            propertyObj.put("Bedrooms", card.getFieldValue("Bedrooms"));
+            propertyObj.put("Bathrooms", card.getFieldValue("Bathrooms"));
+            propertyObj.put("Status", card.getFieldValue("Status"));
+            propertyObj.put("Agent", card.getFieldValue("Agent"));
+
+        //-Adds to array
+            propertyArray.put(propertyObj);
+
+        //-Saves back to file (overwrite with full array)
+            try (FileWriter writerObj = new FileWriter(saveObj)) 
+            {
+                writerObj.write(propertyArray.toString(4));                            //-Prints the JSON array to the file with 4-space indentation
+            }
+                JOptionPane.showMessageDialog(null,
+                    "Property saved successfully!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (IOException a) {                                                           //-Handles file read/write errors
+                a.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                        "Error accessing the JSON file: " + a.getMessage(),
+                        "File Error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                } catch (org.json.JSONException b) {                                                //-Handles invalid JSON parsing or manipulation
+                    b.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                            "Error processing JSON data: " + b.getMessage(),
+                            "JSON Error",
+                            JOptionPane.ERROR_MESSAGE);
+            }
         }
-
-    //-Creates a new property object
-        JSONObject propertyObj = new JSONObject();
-        propertyObj.put("Account Number", card.getFieldValue("Account Number"));
-        propertyObj.put("Property Address", card.getFieldValue("Property Address"));
-        propertyObj.put("Monthly Rent", card.getFieldValue("Monthly Rent"));
-        propertyObj.put("Property Type", card.getFieldValue("Property Type"));
-        propertyObj.put("Bedrooms", card.getFieldValue("Bedrooms"));
-        propertyObj.put("Bathrooms", card.getFieldValue("Bathrooms"));
-        propertyObj.put("Status", card.getFieldValue("Status"));
-        propertyObj.put("Agent", card.getFieldValue("Agent"));
-
-    //-Adds to array
-        propertyArray.put(propertyObj);
-
-    //-Saves back to file (overwrite with full array)
-        try (FileWriter writerObj = new FileWriter(saveObj)) 
-        {
-            writerObj.write(propertyArray.toString(4));                                //-Prints the JSON array to the file with 4-space indentation
-        }
-            JOptionPane.showMessageDialog(null,
-                "Property saved successfully!",
-                "Success",
-                JOptionPane.INFORMATION_MESSAGE);
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-        }
-    }
 
         /**
          * Updates the results table with the given property details
@@ -179,6 +191,7 @@ public class ValidationsHelper
     
     /**
      * Populates property data from the JSON file
+     * Catch exceptions was assisted by Open AI
      */
     public static void loadProperties() 
     {
@@ -193,11 +206,25 @@ public class ValidationsHelper
 
             String contentObj = new String(Files.readAllBytes(loadObj.toPath()));                   //-Reads the Json file 
             propertyArray = new JSONArray(contentObj);                                              //-Parses the Json file content into a JSONArray
-        } catch (Exception ex) {
-            ex.printStackTrace();                                                                   //-Prints the stack trace for debugging
-            propertyArray = new JSONArray();                                                        //-Initializes an empty JSONArray if an error occurs
+            
+            } catch (IOException a) {                                                               //-Handles file access issues
+            a.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Error reading the JSON file: " + a.getMessage(),
+                    "File Error",
+                    JOptionPane.ERROR_MESSAGE);
+            propertyArray = new JSONArray();                                                        //-Initialise empty array if error occurs
+
+            } catch (org.json.JSONException b) {                                                    //-Handles invalid JSON content
+            b.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Error parsing JSON data: " + b.getMessage(),
+                    "JSON Error",
+                    JOptionPane.ERROR_MESSAGE);
+            propertyArray = new JSONArray();                                                        //-Initialise empty array if error occurs
         }
     }
+
     
       /**
      * Validates a number input field
@@ -211,7 +238,7 @@ public class ValidationsHelper
                                                     JTextField field, 
                                                     String fieldName, 
                                                     boolean allowDecimal
-                                                  ) 
+        ) 
     {
         while (true)                                                                                //-Keep looping until valid input is entered 
         { 
@@ -289,7 +316,7 @@ public class ValidationsHelper
                 Integer.parseInt(text);                                                             //-Converts a string to a whole number
             }
             return true;                                                                            //-Valid number
-        } catch (NumberFormatException ex) {
+        } catch (NumberFormatException j) {
             JOptionPane.showMessageDialog(field, fieldName + " must be a valid " + 
                                            (allowDecimal ? "number." : "whole number."),
                                            "Validation Error", JOptionPane.ERROR_MESSAGE);
@@ -323,10 +350,14 @@ public class ValidationsHelper
                     return IterObj;
                 }
             }
-                } catch (Exception ex) {
+                } catch (IOException | org.json.JSONException ex) {                                                          
                     ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null,
+                    "Error processing the property file: " + ex.getMessage(),
+                    "File/JSON Error",
+                    JOptionPane.ERROR_MESSAGE);
             }
-        return null;
+        return null;                                                                                //-Return null if not found or error occurs
     }
 
     /**
@@ -366,8 +397,20 @@ public class ValidationsHelper
 
             return found;                                                                           //-Return true if property was found and deleted
 
-        } catch (IOException e) {
-            e.printStackTrace();                                                                    //-Log the error
+            } catch (IOException a) {                                                               //-Handles file access errors
+            a.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Error accessing the property file: " + a.getMessage(),
+                    "File Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+
+        } catch (org.json.JSONException b) {                                                        //-Handles JSON parsing errors
+            b.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "Error parsing JSON data: " + b.getMessage(),
+                    "JSON Error",
+                    JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
