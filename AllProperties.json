@@ -1,82 +1,92 @@
 [
-  {
-    "Status": "Available",
-    "Agent": "Smith Mbele",
-    "Property Address": "123 Test after Deploy Street",
-    "Account Number": "ACC-208654",
-    "Property Type": "Apartment",
-    "Monthly Rent": "3400",
-    "Bedrooms": "2",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Available",
-    "Agent": "Smith Mbele",
-    "Property Address": "123 Rent >1500 Streey",
-    "Account Number": "ACC-795785",
-    "Property Type": "TownHouse",
-    "Monthly Rent": "1500.90 ",
-    "Bedrooms": "3",
-    "Bathrooms": "2"
-  },
-  {
-    "Status": "Available",
-    "Agent": "Smith Mbele",
-    "Property Address": "123 Test with Wife Street",
-    "Account Number": "ACC-276096",
-    "Property Type": "Flat",
-    "Monthly Rent": "1500.00",
-    "Bedrooms": "1",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Available",
-    "Agent": "Smith Mbele",
-    "Property Address": "Test Decimals",
-    "Account Number": "ACC-908487",
-    "Property Type": "Apartment",
-    "Monthly Rent": "1500.00",
-    "Bedrooms": "2",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Occupied",
-    "Agent": "Smith Mbele",
-    "Property Address": "123 Test",
-    "Account Number": "ACC-847706",
-    "Property Type": "Flat",
-    "Monthly Rent": "1500",
-    "Bedrooms": "1",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Available",
-    "Agent": "Smith Mbele",
-    "Property Address": "Test",
-    "Account Number": "ACC-72877",
-    "Property Type": "Apartment",
-    "Monthly Rent": "1500.00",
-    "Bedrooms": "1",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Available",
-    "Agent": "Test",
-    "Property Address": "123 Test 2",
-    "Account Number": "ACC-787093",
-    "Property Type": "Apartment",
-    "Monthly Rent": "1500",
-    "Bedrooms": "2",
-    "Bathrooms": "1"
-  },
-  {
-    "Status": "Available",
-    "Agent": "Tshepo Mathews",
-    "Account Number": "ACC-407608",
-    "Property Address": "Test Final",
-    "Property Type": "Apartment",
-    "Monthly Rent": "2000",
-    "Bedrooms": "2",
-    "Bathrooms": "1"
-  }
+    {
+        "Status": "Available",
+        "Agent": "Smith Mbele",
+        "Property Address": "123 Test after Deploy Street",
+        "Account Number": "ACC-208654",
+        "Property Type": "Apartment",
+        "Monthly Rent": "3400",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Smith Mbele",
+        "Property Address": "123 Rent >1500 Streey",
+        "Account Number": "ACC-795785",
+        "Property Type": "TownHouse",
+        "Monthly Rent": "1500.90 ",
+        "Bedrooms": "3",
+        "Bathrooms": "2"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Smith Mbele",
+        "Property Address": "123 Test with Wife Street",
+        "Account Number": "ACC-276096",
+        "Property Type": "Flat",
+        "Monthly Rent": "1500.00",
+        "Bedrooms": "1",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Smith Mbele",
+        "Property Address": "Test Decimals",
+        "Account Number": "ACC-908487",
+        "Property Type": "Apartment",
+        "Monthly Rent": "1500.00",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Occupied",
+        "Agent": "Smith Mbele",
+        "Property Address": "123 Test",
+        "Account Number": "ACC-847706",
+        "Property Type": "Flat",
+        "Monthly Rent": "1500",
+        "Bedrooms": "1",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Smith Mbele",
+        "Property Address": "Test",
+        "Account Number": "ACC-72877",
+        "Property Type": "Apartment",
+        "Monthly Rent": "1500.00",
+        "Bedrooms": "1",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Test",
+        "Property Address": "123 Test 2",
+        "Account Number": "ACC-787093",
+        "Property Type": "Apartment",
+        "Monthly Rent": "1500",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Tshepo Mathews",
+        "Account Number": "ACC-407608",
+        "Property Address": "Test Final",
+        "Property Type": "Apartment",
+        "Monthly Rent": "2000",
+        "Bedrooms": "2",
+        "Bathrooms": "1"
+    },
+    {
+        "Status": "Available",
+        "Agent": "Mpho Mbele",
+        "Account Number": "ACC-428670",
+        "Property Address": "13 Final Roll",
+        "Property Type": "House",
+        "Monthly Rent": "1800",
+        "Bedrooms": "3",
+        "Bathrooms": "1"
+    }
 ]
